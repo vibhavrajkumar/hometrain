@@ -63,20 +63,67 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      body: Column(
-        children: <Widget>[
-          Container(
-            child: Stack(
-              children: <Widget>[
-                Container(
-                  padding: EdgeInsets.fromLTRB(15, 110, 0, 0),
-                  child: Image.network(
-                    'https://github.com/CS222SP22/course-project-mem/blob/main/logo.png',
+    double width = MediaQuery.of(context).size.width; 
+    double height = MediaQuery.of(context).size.height; //safearea (button locations)
+    var padding = MediaQuery.of(context).padding; 
+    double total_height = height - padding.top - padding.bottom; //total height (including unsafe area)
+    return Scaffold(
+      
+
+      body: Row(
+       mainAxisAlignment: MainAxisAlignment.spaceAround,
+       crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[ 
+          Stack(
+            children: <Widget>[
+             Align(
+              alignment: FractionalOffset.topCenter,
+              child: Image.asset(
+                "assets/logo.png",width: width*0.3,
+                ), //logo upload
+              ),
+          
+              Positioned(
+              bottom: 150, 
+              child: TextButton(onPressed:(){},child:Container(
+                height: 50, 
+                width: 300,
+                color: Colors.transparent,
+                child: Container(
+                  decoration: const BoxDecoration(
+                    color: Color.fromRGBO(0, 93, 92,1.0),
+                    borderRadius: BorderRadius.all(Radius.circular(20.0))
                     ),
+                  child: const Center(
+                    child: Text("Log In",
+                    style: TextStyle(fontSize: 22, color: Colors.white),
+                    textAlign: TextAlign.center,),
                   )
-                ],
+                  )
+                ),
+              ),
+              ), 
+              Positioned(
+              bottom: 50,
+              child: TextButton(onPressed:(){},child:Container(
+                height: 50, 
+                width: 300,
+                color: Colors.transparent,
+                child: Container(
+                  decoration: const BoxDecoration(
+                    color: Color.fromRGBO(0, 66, 96,1.0),
+                    borderRadius: BorderRadius.all(Radius.circular(20.0))
+                    ),
+                  child: const Center(
+                    child: Text("Sign Up",
+                    style: TextStyle(fontSize: 22, color: Colors.white),
+                    textAlign: TextAlign.center,),
+                  )
+                  )
+                )
               )
+              ),
+              ],
             ),
           ]
         )
