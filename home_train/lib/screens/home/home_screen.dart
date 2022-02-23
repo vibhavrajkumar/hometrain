@@ -39,16 +39,16 @@ class _BottomNavbar extends State<BottomNavbar> {
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
+        items: <BottomNavigationBarItem>[
+          const BottomNavigationBarItem(
             icon: Icon(Icons.assessment_outlined),
             label: 'Workouts',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Image.asset("../assets/HomeTrainLogo.png"),
             label: 'Home',
           ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: 'Profile',
           ),
