@@ -11,6 +11,7 @@ class _BottomNavbar extends State<BottomNavbar> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  //Not needed just place holder for what goes in body
   static const List<Widget> _widgetOptions = <Widget>[
     Text(
       'Index 0: Workouts',
@@ -35,9 +36,7 @@ class _BottomNavbar extends State<BottomNavbar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text('BottomNavigationBar'),
-      // ),
+      //update what goes in body here
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
@@ -57,7 +56,7 @@ class _BottomNavbar extends State<BottomNavbar> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
+        selectedItemColor: Color.fromARGB(255, 0, 58, 146),
         onTap: _onItemTapped,
       ),
     );
