@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:home_train/screens/workout_scroll.dart';
 
 class BottomNavbar extends StatefulWidget {
   const BottomNavbar({Key? key}) : super(key: key);
@@ -13,10 +14,7 @@ class _BottomNavbar extends State<BottomNavbar> {
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   //Not needed just place holder for what goes in body
   static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0: Workouts',
-      style: optionStyle,
-    ),
+    WorkoutScroll(),
     Text(
       'Index 1: Home',
       style: optionStyle,
@@ -56,7 +54,7 @@ class _BottomNavbar extends State<BottomNavbar> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Color.fromARGB(255, 0, 58, 146),
+        selectedItemColor: const Color.fromARGB(255, 0, 58, 146),
         onTap: _onItemTapped,
       ),
     );
