@@ -12,6 +12,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreen extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    //Home page includes the top banner and workout scroll
     return Column(
       children: const [HomeBanner(), WorkoutScroll()],
     );

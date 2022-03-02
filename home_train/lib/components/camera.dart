@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../main.dart';
 
+//Class to show real time camera view
 class CameraScreen extends StatefulWidget {
   @override
   _CameraScreenState createState() => _CameraScreenState();
@@ -86,6 +87,7 @@ class _CameraScreenState extends State<CameraScreen>
     }
   }
 
+  //Main widget that displays camera feed
   Widget buildEntireScreen(BuildContext context) {
     return Stack(
       children: <Widget>[
@@ -94,7 +96,7 @@ class _CameraScreenState extends State<CameraScreen>
             alignment: Alignment.bottomCenter,
             child: Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: buildZoom(context))),
+                child: buildCameraSwitch(context))),
       ],
     );
   }
@@ -119,7 +121,8 @@ class _CameraScreenState extends State<CameraScreen>
     );
   }
 
-  Widget buildZoom(BuildContext context) {
+  //Icon to switch front and back camera
+  Widget buildCameraSwitch(BuildContext context) {
     return InkWell(
       onTap: () {
         setState(() {

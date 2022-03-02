@@ -2,18 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:home_train/constants.dart' as constants;
 import 'package:home_train/components/camera.dart';
 
-import 'package:camera/camera.dart';
-
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
-  // Obtain a list of the available cameras on the device.
-  final cameras = await availableCameras();
-
-  // Get a specific camera from the list of available cameras.
-  final firstCamera = cameras.first;
-}
-
 /*
   Takes in a list of labels to dynamically create a list of scrollable boxes
   Calls [colorTransition] to create a gradient.

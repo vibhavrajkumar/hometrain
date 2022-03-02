@@ -49,8 +49,8 @@ class _BottomNavbar extends State<BottomNavbar> {
             label: 'Workouts',
           ),
           BottomNavigationBarItem(
-            // icon: Image.asset("images/HomeTrainLogo.png"),
-            icon: Icon(Icons.home_outlined),
+            icon: Image.asset("images/HomeTrainLogo.png"),
+            // icon: Icon(Icons.home_outlined),
             label: 'Home',
           ),
           const BottomNavigationBarItem(

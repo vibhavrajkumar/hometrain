@@ -12,28 +12,13 @@ class HomeBanner extends StatefulWidget {
 class _HomeBanner extends State<HomeBanner> {
   @override
   Widget build(BuildContext context) {
-    double width_ = MediaQuery.of(context).size.width;
-    // double height_ = MediaQuery.of(context).size.height;
+    //Returns top banner of home page
     return Container(
       height: 300,
-      // color: Color.fromARGB(255, 255, 0, 0),
       child: Stack(children: <Widget>[
-        Container(
-          color: constants.homeTrainBlue,
-          width: width_,
-          height: 250,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  _buildTitle(),
-                ],
-              ),
-            ],
-          ),
-        ),
+        //Builds top blue box with text
+        _buildBanner(context),
+        //Builds image of man working out
         Positioned(
           top: 150,
           right: 0,
@@ -47,6 +32,28 @@ class _HomeBanner extends State<HomeBanner> {
   }
 }
 
+//Builds top blue box with text
+Widget _buildBanner(BuildContext context) {
+  double width_ = MediaQuery.of(context).size.width;
+  return Container(
+    decoration: const BoxDecoration(color: constants.homeTrainBlue),
+    width: width_,
+    height: 250,
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            _buildTitle(),
+          ],
+        ),
+      ],
+    ),
+  );
+}
+
+//Builds title for top banner
 Widget _buildTitle() {
   return Center(
     child: Column(
