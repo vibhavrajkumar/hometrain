@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../util/colors.dart' as ht_colors;
+import 'package:home_train/constants.dart' as constants;
 
 List<Widget> getWorkoutBoxes(List<String> labels, BuildContext context) {
   var gradient = ht_colors.colorTransition(labels.length);
@@ -52,7 +53,7 @@ class _WorkoutScroll extends State<WorkoutScroll> {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 1.0),
-      height: 300,
+      height: 200,
       child: ListView(
           scrollDirection: Axis.horizontal,
           children: getWorkoutBoxes([
