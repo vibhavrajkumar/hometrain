@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:home_train/screens/home_screen.dart';
+import 'package:home_train/constants.dart' as constants;
 
 class BottomNavbar extends StatefulWidget {
   const BottomNavbar({Key? key}) : super(key: key);
@@ -39,22 +40,23 @@ class _BottomNavbar extends State<BottomNavbar> {
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: <BottomNavigationBarItem>[
-          const BottomNavigationBarItem(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
             icon: Icon(Icons.assessment_outlined),
             label: 'Workouts',
           ),
           BottomNavigationBarItem(
-            icon: Image.asset('images/HomeTrainLogo.png'),
+            // icon: Image.asset('images/HomeTrainLogo.png'),
+            icon: Icon(Icons.home_outlined),
             label: 'Home',
           ),
-          const BottomNavigationBarItem(
+          BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: 'Profile',
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: const Color.fromARGB(255, 0, 58, 146),
+        selectedItemColor: constants.mainColor,
         onTap: _onItemTapped,
       ),
     );
