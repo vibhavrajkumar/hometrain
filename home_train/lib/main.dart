@@ -71,27 +71,27 @@ class _MyHomePageState extends State<MyHomePage> {
 
       body: Row(
        mainAxisAlignment: MainAxisAlignment.spaceAround,
-       crossAxisAlignment: CrossAxisAlignment.start,
+       //crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[ 
           Stack(
             children: <Widget>[
              Align(
-              alignment: FractionalOffset(0.2, 0.3),
+              alignment: FractionalOffset.topCenter,
               child: Image.asset(
-                "assets/logo.png",width: width*0.8,
+                "assets/logo.png",width: width*0.3,
                 ), //logo upload
               ),
           
               Positioned(
               bottom: 150, 
-              right: 25,
+              //right: 25,
               child: TextButton(onPressed:(){
                 Navigator.push(context,
                   MaterialPageRoute(builder: (context) => const Signin_Builder()),
                 );
               },child:Container(
                 height: 50, 
-                width: 250,
+                width: 300,
                 color: Colors.transparent,
                 child: Container(
                   decoration: const BoxDecoration(
@@ -109,10 +109,10 @@ class _MyHomePageState extends State<MyHomePage> {
               ), 
               Positioned(
               bottom: 50,
-              right: 25,
+              //right: 25,
               child: TextButton(onPressed:(){},child:Container(
                 height: 50, 
-                width: 250,
+                width: 300,
                 color: Colors.transparent,
                 child: Container(
                   decoration: const BoxDecoration(
