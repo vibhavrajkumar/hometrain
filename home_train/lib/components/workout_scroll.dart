@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import '../util/colors.dart' as ht_colors;
 import 'package:home_train/constants.dart' as constants;
 
 List<Widget> getWorkoutBoxes(List<String> labels, BuildContext context) {
-  var gradient = ht_colors.colorTransition(labels.length);
+  var gradient = constants.colorTransition(labels.length);
   List<Widget> boxes = [];
   for (var i = 0; i < labels.length; i++) {
     boxes.add(getWorkoutBox(labels[i], gradient[i], context));
@@ -25,7 +24,7 @@ Widget getWorkoutBox(String label, Color color, BuildContext context) {
           label,
           textAlign: TextAlign.center,
           style: const TextStyle(
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w400,
             color: Colors.white,
             fontSize: 30,
           ), // This needs to be standardized and default
@@ -61,12 +60,6 @@ class _WorkoutScroll extends State<WorkoutScroll> {
             "Sit-Ups",
             "Squats",
             "Plank",
-            "Cry",
-            "1",
-            "2",
-            "3",
-            "4",
-            "5"
           ], context)),
     );
   }
