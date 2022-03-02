@@ -32,6 +32,9 @@ class _BottomNavbar extends State<BottomNavbar> {
     });
   }
 
+  /*
+    Creates a navbar with three sections: Workout, Home, and Profile
+  */
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,23 +43,23 @@ class _BottomNavbar extends State<BottomNavbar> {
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
+        items: <BottomNavigationBarItem>[
+          const BottomNavigationBarItem(
             icon: Icon(Icons.assessment_outlined),
             label: 'Workouts',
           ),
           BottomNavigationBarItem(
-            // icon: Image.asset('images/HomeTrainLogo.png'),
-            icon: Icon(Icons.home_outlined),
+            icon: Image.asset("../../images/HomeTrainLogo.png"),
+            // icon: Icon(Icons.home_outlined),
             label: 'Home',
           ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: 'Profile',
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: constants.mainColor,
+        selectedItemColor: constants.homeTrainBlue,
         onTap: _onItemTapped,
       ),
     );

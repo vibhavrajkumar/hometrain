@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-// import 'package:home_train/components/workout_scroll.dart';
 import 'package:home_train/constants.dart' as constants;
 
 class HomeBanner extends StatefulWidget {
@@ -20,7 +19,7 @@ class _HomeBanner extends State<HomeBanner> {
       // color: Color.fromARGB(255, 255, 0, 0),
       child: Stack(children: <Widget>[
         Container(
-          color: constants.mainColor,
+          color: constants.homeTrainBlue,
           width: width_,
           height: 250,
           child: Row(
@@ -54,7 +53,7 @@ Widget _buildTitle() {
       child: Column(
         children: const <Widget>[
           Text(
-            "Input Text",
+            "Let's HomeTrain 🔥",
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.w300,

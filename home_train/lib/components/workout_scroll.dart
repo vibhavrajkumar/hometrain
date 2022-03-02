@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:home_train/constants.dart' as constants;
 
+/*
+  Takes in a list of labels to dynamically create a list of scrollable boxes
+  Calls [colorTransition] to create a gradient.
+*/
 List<Widget> getWorkoutBoxes(List<String> labels, BuildContext context) {
   var gradient = constants.colorTransition(labels.length);
   List<Widget> boxes = [];
@@ -10,6 +14,10 @@ List<Widget> getWorkoutBoxes(List<String> labels, BuildContext context) {
   return boxes;
 }
 
+/*
+  Creates a button with rounded edges through [BoxDecoration]
+  Centers label horizontally and vertically and adds margins to edges.
+*/
 Widget getWorkoutBox(String label, Color color, BuildContext context) {
   return InkWell(
     child: Container(
@@ -33,6 +41,7 @@ Widget getWorkoutBox(String label, Color color, BuildContext context) {
       margin: const EdgeInsets.all(15),
     ),
     onTap: () {
+      // TODO: IMPLEMENT REAL FUNCTIONALITY FOR BUTTON
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text(label + " workout started!"),
       ));
@@ -40,6 +49,10 @@ Widget getWorkoutBox(String label, Color color, BuildContext context) {
   );
 }
 
+/*
+  Creates Widget for Workout Scroll
+  Might make stateless later if it doesn't need to be dynamically updated
+*/
 class WorkoutScroll extends StatefulWidget {
   const WorkoutScroll({Key? key}) : super(key: key);
 
@@ -47,6 +60,9 @@ class WorkoutScroll extends StatefulWidget {
   State<WorkoutScroll> createState() => _WorkoutScroll();
 }
 
+/*
+  State and Build for WorkoutScroll
+*/
 class _WorkoutScroll extends State<WorkoutScroll> {
   @override
   Widget build(BuildContext context) {

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-const Color mainColor = Color.fromARGB(255, 0, 66, 96);
-
 const homeTrainBlue = Color.fromRGBO(00, 42, 60, 1);
 const homeTrainGreen = Color.fromRGBO(00, 93, 92, 1);
 
