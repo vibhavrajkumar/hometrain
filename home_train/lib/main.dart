@@ -62,14 +62,16 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    //get dimensions to set sizes relative to size of screen 
     double width = MediaQuery.of(context).size.width;
     double height =
-        MediaQuery.of(context).size.height; //safearea (button locations)
+        MediaQuery.of(context).size.height; //safearea (valid button locations)
     var padding = MediaQuery.of(context).padding;
     double total_height = height -
         padding.top -
         padding.bottom; //total height (including unsafe area)
     return Scaffold(
+      //create widgets in a uniform line
         body: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -83,11 +85,13 @@ class _MyHomePageState extends State<MyHomePage> {
                   width: width * 0.8,
                 ), //logo upload
               ),
+              //create button for login page
               Positioned(
                 bottom: 150,
                 right: 25,
                 child: TextButton(
                   onPressed: () {
+                    //send to SignInBuilder page when button is pressed
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -95,6 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     );
                   },
                   child: Container(
+                    //create box with "log in" with correct colors
                       height: 50,
                       width: 250,
                       color: Colors.transparent,
@@ -107,17 +112,25 @@ class _MyHomePageState extends State<MyHomePage> {
                             child: Text(
                               "Log In",
                               style:
-                                  TextStyle(fontSize: 20, color: Colors.white),
+                                  TextStyle(fontSize: 20, color: Colors.white,fontFamily: 'Montserrat'),
                               textAlign: TextAlign.center,
                             ),
                           ))),
                 ),
               ),
+              //create box with "sign up and correct colors"
               Positioned(
                   bottom: 50,
                   right: 25,
                   child: TextButton(
-                      onPressed: () {},
+                    //when button is pressed, send to sign up page
+                      onPressed: () {
+                        Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const SignUp_Builder()),
+                    );
+                      },
                       child: Container(
                           height: 50,
                           width: 250,
@@ -131,100 +144,12 @@ class _MyHomePageState extends State<MyHomePage> {
                                 child: Text(
                                   "Sign Up",
                                   style: TextStyle(
-                                      fontSize: 20, color: Colors.white),
+                                      fontSize: 20, color: Colors.white, fontFamily: 'Montserrat'),
                                   textAlign: TextAlign.center,
                                 ),
                               ))))),
             ],
           ),
         ]));
-  }
-}
-
-class Signin_Builder extends StatefulWidget {
-  const Signin_Builder({Key? key}) : super(key: key);
-
-  @override
-  State<StatefulWidget> createState() => _signin();
-}
-
-class _signin extends State<Signin_Builder> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          backgroundColor: const Color.fromRGBO(0, 93, 92, 1.0),
-          leading: Builder(
-            builder: (BuildContext context) {
-              return IconButton(
-                icon: const Icon(Icons.arrow_back),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              );
-            },
-          ),
-          title: const Text('Sign In'),
-        ),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-              child: TextFormField(
-                decoration: const InputDecoration(
-                  border: UnderlineInputBorder(),
-                  labelText: 'Enter your username',
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-              child: TextFormField(
-                decoration: const InputDecoration(
-                  border: UnderlineInputBorder(),
-                  labelText: 'Enter your password',
-                ),
-              ),
-            ),
-            TextButton(
-              onPressed: () {},
-              child: Container(
-                  height: 50,
-                  width: 75,
-                  color: Colors.transparent,
-                  child: Container(
-                      decoration: const BoxDecoration(
-                          color: Color.fromRGBO(0, 93, 92, 1.0),
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(20.0))),
-                      child: const Center(
-                        child: Text(
-                          "Log In",
-                          style: TextStyle(fontSize: 20, color: Colors.white),
-                          textAlign: TextAlign.center,
-                        ),
-                      ))),
-            ),
-          ],
-        ));
-
-    //   body: Row(
-    //     children: <Widget>[
-    //       Align(
-    //         alignment: FractionalOffset.center,
-    //         child: Container(
-    //           decoration: BoxDecoration(
-    //             color: const Color.fromARGB(255, 0, 0, 0),
-    //             border: Border.all(
-    //               color: const Color.fromRGBO(0, 93, 92, 1.0),
-    //               width: 3
-    //             )
-    //           ),
-    //         )
-    //         )
-    //     ]
-    //   )
-    // );
   }
 }
