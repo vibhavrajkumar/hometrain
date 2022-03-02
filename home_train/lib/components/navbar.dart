@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:home_train/screens/workout_scroll.dart';
+import 'package:home_train/screens/home_screen.dart';
 
 class BottomNavbar extends StatefulWidget {
   const BottomNavbar({Key? key}) : super(key: key);
@@ -14,11 +14,11 @@ class _BottomNavbar extends State<BottomNavbar> {
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   //Not needed just place holder for what goes in body
   static const List<Widget> _widgetOptions = <Widget>[
-    WorkoutScroll(),
     Text(
-      'Index 1: Home',
+      'Index 1: Workouts',
       style: optionStyle,
     ),
+    HomeScreen(),
     Text(
       'Index 2: Profile',
       style: optionStyle,
@@ -45,7 +45,7 @@ class _BottomNavbar extends State<BottomNavbar> {
             label: 'Workouts',
           ),
           BottomNavigationBarItem(
-            icon: Image.asset("../assets/HomeTrainLogo.png"),
+            icon: Image.asset('images/HomeTrainLogo.png'),
             label: 'Home',
           ),
           const BottomNavigationBarItem(

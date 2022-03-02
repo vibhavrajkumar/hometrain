@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'screens/home/home_screen.dart';
+import 'components/navbar.dart';
 
 void main() {
   runApp(const MyApp());
