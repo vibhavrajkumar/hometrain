@@ -12,15 +12,13 @@ class _CameraScreenState extends State<CameraScreen>
     with WidgetsBindingObserver {
   CameraController? controller;
   bool _isCameraInitialized = false;
-  double _minAvailableZoom = 1.0;
-  double _maxAvailableZoom = 1.0;
-  double _currentZoomLevel = 1.0;
+  bool _isRearCameraSelected = true;
 
   @override
   void initState() {
     // SystemChrome.setEnabledSystemUIOverlays([]);
     if (cameras.isNotEmpty) {
-      onNewCameraSelected(cameras[1]);
+      onNewCameraSelected(cameras[0]);
     }
     super.initState();
   }
@@ -88,56 +86,67 @@ class _CameraScreenState extends State<CameraScreen>
     }
   }
 
+  Widget buildEntireScreen(BuildContext context) {
+    return Stack(
+      children: <Widget>[
+        buildCameraView(context),
+        Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: buildZoom(context))),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: <Widget>[buildCameraView(context)],
+    return Scaffold(
+      body: buildEntireScreen(context),
     );
   }
 
   Widget buildCameraView(BuildContext context) {
     return Container(
       child: _isCameraInitialized
-          ? AspectRatio(
-              aspectRatio: 1 / controller!.value.aspectRatio,
-              child: controller!.buildPreview(),
-            )
-          : const Center(child: Text("No Camera available")),
+          ? Transform.scale(
+              scale: 1 /
+                  (controller!.value.aspectRatio *
+                      MediaQuery.of(context).size.aspectRatio),
+              alignment: Alignment.topCenter,
+              child: CameraPreview(controller!))
+          : Container(),
     );
   }
 
   Widget buildZoom(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          child: Slider(
-            value: _currentZoomLevel,
-            min: _minAvailableZoom,
-            max: _maxAvailableZoom,
-            activeColor: Colors.white,
-            inactiveColor: Colors.white30,
-            onChanged: (value) async {
-              setState(() {
-                _currentZoomLevel = value;
-              });
-              await controller!.setZoomLevel(value);
-            },
+    return InkWell(
+      onTap: () {
+        setState(() {
+          _isCameraInitialized = false;
+        });
+        onNewCameraSelected(
+          cameras[_isRearCameraSelected ? 1 : 0],
+        );
+        setState(() {
+          _isRearCameraSelected = !_isRearCameraSelected;
+        });
+      },
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          const Icon(
+            Icons.circle,
+            color: Colors.black38,
+            size: 60,
           ),
-        ),
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.black87,
-            borderRadius: BorderRadius.circular(10.0),
+          Icon(
+            _isRearCameraSelected ? Icons.camera_front : Icons.camera_rear,
+            color: Colors.white,
+            size: 30,
           ),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              _currentZoomLevel.toStringAsFixed(1) + 'x',
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
