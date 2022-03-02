@@ -75,17 +75,18 @@ class _MyHomePageState extends State<MyHomePage> {
           Stack(
             children: <Widget>[
              Align(
-              alignment: FractionalOffset.topCenter,
+              alignment: FractionalOffset(0.2, 0.3),
               child: Image.asset(
-                "assets/logo.png",width: width*0.3,
+                "assets/logo.png",width: width*0.8,
                 ), //logo upload
               ),
           
               Positioned(
               bottom: 150, 
+              right: 25,
               child: TextButton(onPressed:(){},child:Container(
                 height: 50, 
-                width: 300,
+                width: 250,
                 color: Colors.transparent,
                 child: Container(
                   decoration: const BoxDecoration(
@@ -94,7 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   child: const Center(
                     child: Text("Log In",
-                    style: TextStyle(fontSize: 22, color: Colors.white),
+                    style: TextStyle(fontSize: 20, color: Colors.white),
                     textAlign: TextAlign.center,),
                   )
                   )
@@ -103,9 +104,10 @@ class _MyHomePageState extends State<MyHomePage> {
               ), 
               Positioned(
               bottom: 50,
+              right: 25,
               child: TextButton(onPressed:(){},child:Container(
                 height: 50, 
-                width: 300,
+                width: 250,
                 color: Colors.transparent,
                 child: Container(
                   decoration: const BoxDecoration(
@@ -114,7 +116,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   child: const Center(
                     child: Text("Sign Up",
-                    style: TextStyle(fontSize: 22, color: Colors.white),
+                    style: TextStyle(fontSize: 20, color: Colors.white),
                     textAlign: TextAlign.center,),
                   )
                   )
