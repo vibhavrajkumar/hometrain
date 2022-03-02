@@ -13,7 +13,7 @@ class _BottomNavbar extends State<BottomNavbar> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  //Not needed just place holder for what goes in body
+  //Place holder for what goes in body
   static const List<Widget> _widgetOptions = <Widget>[
     Text(
       'Index 1: Workouts',
@@ -49,8 +49,8 @@ class _BottomNavbar extends State<BottomNavbar> {
             label: 'Workouts',
           ),
           BottomNavigationBarItem(
-            icon: Image.asset("../../images/HomeTrainLogo.png"),
-            // icon: Icon(Icons.home_outlined),
+            // icon: Image.asset("images/HomeTrainLogo.png"),
+            icon: Icon(Icons.home_outlined),
             label: 'Home',
           ),
           const BottomNavigationBarItem(

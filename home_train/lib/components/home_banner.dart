@@ -13,7 +13,7 @@ class _HomeBanner extends State<HomeBanner> {
   @override
   Widget build(BuildContext context) {
     double width_ = MediaQuery.of(context).size.width;
-    double height_ = MediaQuery.of(context).size.height;
+    // double height_ = MediaQuery.of(context).size.height;
     return Container(
       height: 300,
       // color: Color.fromARGB(255, 255, 0, 0),
@@ -49,20 +49,18 @@ class _HomeBanner extends State<HomeBanner> {
 
 Widget _buildTitle() {
   return Center(
-    child: Container(
-      child: Column(
-        children: const <Widget>[
-          Text(
-            "Let's HomeTrain 🔥",
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.w300,
-              fontSize: 40,
-            ),
-            // textAlign: TextAlign.center,
+    child: Column(
+      children: const <Widget>[
+        Text(
+          "Let's HomeTrain 🔥",
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w300,
+            fontSize: 40,
           ),
-        ],
-      ),
+          // textAlign: TextAlign.center,
+        ),
+      ],
     ),
   );
 }
