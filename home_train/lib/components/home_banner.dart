@@ -59,7 +59,7 @@ Widget _buildTitle() {
     child: Column(
       children: const <Widget>[
         Text(
-          "Let's HomeTrain 🔥",
+          "Let's Train!",
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.w300,
