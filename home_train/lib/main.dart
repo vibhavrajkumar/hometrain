@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:home_train/components/login_in.dart';
 import 'components/navbar.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:camera/camera.dart';
 
 List<CameraDescription> cameras = [];
@@ -12,6 +14,12 @@ void main() async {
     print('Error in fetching the cameras: $e');
   }
 
+  WidgetsFlutterBinding.ensureInitialized();
+
+// initializing the firebase app
+  await Firebase.initializeApp();
+
+// calling of runApp
   runApp(const MyApp());
 }
 
@@ -25,7 +33,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Home Train',
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: const BottomNavbar(),
+      // home: const BottomNavbar(),
+      home: const LoginPage(),
     );
   }
 }
