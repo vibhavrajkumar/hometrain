@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:home_train/main.dart';
 class Signin_Builder extends StatefulWidget {
   //new widget for signin page
   const Signin_Builder({Key? key}) : super(key: key);
@@ -80,7 +82,7 @@ class _signin extends State<Signin_Builder> {
             ),
             TextButton(
               //todo (link with firebase when "login" pressed)
-              onPressed: () {},
+              onPressed: () {signup(context);},
               child: Container(
                 //create login button with correct colors and rounded edges
                   height: 50,
@@ -93,7 +95,7 @@ class _signin extends State<Signin_Builder> {
                               BorderRadius.all(Radius.circular(20.0))),
                       child: const Center(
                         child: Text(
-                          "Log In",
+                          "Log In With Google",
                           style: TextStyle(fontSize: 20, color: Colors.white, fontFamily: 'Montserrat'),
                           textAlign: TextAlign.center,
                         ),
@@ -196,3 +198,23 @@ class _signup extends State<SignUp_Builder> {
         ));
   }
 }
+
+final FirebaseAuth auth = FirebaseAuth.instance; 
+  
+  Future<void> signup(BuildContext context) async{
+    final GoogleSignIn googleSignIn = GoogleSignIn(); 
+    final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn(); 
+    if(googleSignInAccount!=null){
+      final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication; 
+      final AuthCredential authCredential = GoogleAuthProvider.credential(idToken: googleSignInAuthentication.idToken,
+        accessToken: googleSignInAuthentication.accessToken); 
+      
+      UserCredential result = await auth.signInWithCredential(authCredential); 
+      User? user = result.user; 
+
+      if(result!=null){
+        Navigator.pop(context);
+      }
+    }
+
+  }

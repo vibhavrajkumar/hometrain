@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "943291471858",
+    "project_id": "hometrain-4e25a",
+    "storage_bucket": "hometrain-4e25a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:943291471858:android:7cfa799002060605293d6b",
+        "android_client_info": {
+          "package_name": "com.example.home_train"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "943291471858-vlce5kmhelqsbj8kjdgsh4ej1o9t1iog.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDs62M-UkNyCUeHukqCHU_ELRv39Vf2gOI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "943291471858-vlce5kmhelqsbj8kjdgsh4ej1o9t1iog.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "943291471858-3e37v632sq52itaf1fgofktv27r94365.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.homeTrain"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
