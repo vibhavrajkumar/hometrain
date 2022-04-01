@@ -25,7 +25,6 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-
   // This widget is the root of the application.
   @override
   Widget build(BuildContext context) {
@@ -33,8 +32,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Home Train',
       theme: ThemeData(primarySwatch: Colors.blue),
-      // home: const BottomNavbar(),
-      home: const LoginPage(),
+      home: const BottomNavbar(),
+      // home: const LoginPage(),
     );
   }
 }
