@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "/Users/adarshdayalan/Documents/course-project-mem/home_train/build/google_sign_in/intermediates/res/merged/debug/color/common_google_signin_btn_tint.xml",
+        "source": "/Users/adarshdayalan/.gradle/caches/transforms-2/files-2.1/de41bf24a3317a8d85eaf62f22072618/jetified-play-services-base-18.0.1/res/color/common_google_signin_btn_tint.xml"
+    },
+    {
+        "merged": "/Users/adarshdayalan/Documents/course-project-mem/home_train/build/google_sign_in/intermediates/res/merged/debug/color/common_google_signin_btn_text_light.xml",
+        "source": "/Users/adarshdayalan/.gradle/caches/transforms-2/files-2.1/de41bf24a3317a8d85eaf62f22072618/jetified-play-services-base-18.0.1/res/color/common_google_signin_btn_text_light.xml"
+    },
+    {
+        "merged": "/Users/adarshdayalan/Documents/course-project-mem/home_train/build/google_sign_in/intermediates/res/merged/debug/color/common_google_signin_btn_text_dark.xml",
+        "source": "/Users/adarshdayalan/.gradle/caches/transforms-2/files-2.1/de41bf24a3317a8d85eaf62f22072618/jetified-play-services-base-18.0.1/res/color/common_google_signin_btn_text_dark.xml"
+    }
+]
