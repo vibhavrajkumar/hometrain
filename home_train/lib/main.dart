@@ -1,3 +1,5 @@
+import 'dart:async';
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:home_train/components/login_in.dart';
 import 'components/navbar.dart';
@@ -17,7 +19,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
 // initializing the firebase app
-  await Firebase.initializeApp();
+  // await Firebase.initializeApp();
 
 // calling of runApp
   runApp(const MyApp());
@@ -33,8 +35,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Home Train',
       theme: ThemeData(primarySwatch: Colors.blue),
-      // home: const BottomNavbar(),
-      home: const LoginPage(),
+      home: const BottomNavbar(),
+      // home: const LoginPage(),
     );
   }
 }
