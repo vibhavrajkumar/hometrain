@@ -13,54 +13,51 @@ class BottomNavbar extends StatefulWidget {
 
 class _BottomNavbar extends State<BottomNavbar> {
   static const platform = MethodChannel('hometrain.test/battery');
-  static String _batteryLevel = 'Unknown battery level.';
-
-  // static String getBatteryState => _batteryLevel;
+  // Calls MethodChannel
+  static String _batteryLevel = 'Unknown energy level.';
 
   Future<void> _getBatteryLevel() async {
     String batteryLevel;
     try {
       final int result = await platform.invokeMethod('getBatteryLevel');
-      batteryLevel = 'Battery level at $result % .';
+      batteryLevel = 'Workout Readiness: $result%';
     } on PlatformException catch (e) {
       batteryLevel = "Failed to get battery level: '${e.message}'.";
     }
 
-    // print(batteryLevel);
-    setState(() {
-      _batteryLevel = batteryLevel;
-      print(_batteryLevel);
-    });
+    _batteryLevel = batteryLevel;
   }
 
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   //Place holder for what goes in body
-   static List<Widget> _widgetOptions = <Widget>[
-    Text(
-      _batteryLevel,
-      style: optionStyle,
-    ),
-    HomeScreen(),
-    Text(
-      'Index 2: Profile',
-      style: optionStyle,
-    ),
-  ];
 
   void _onItemTapped(int index) {
-    _getBatteryLevel();
     setState(() {
       _selectedIndex = index;
     });
   }
 
   /*
-    Creates a navbar with three sections: Workout, Home, and Profile
+    Creates a navbar with three sections: Workout, Home, and Profile.
+    Currently, Workout displays the 
   */
   @override
   Widget build(BuildContext context) {
+    _getBatteryLevel();
+    List<Widget> _widgetOptions = <Widget>[
+      Text(
+        _batteryLevel,
+        style: optionStyle,
+      ),
+      const HomeScreen(),
+      const Text(
+        'Index 2: Profile',
+        style: optionStyle,
+      ),
+    ];
+
     return Scaffold(
       //update what goes in body here
       body: Center(
