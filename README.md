@@ -1,77 +1,16 @@
-# TensorFlow Lite Pose Estimation iOS Demo
+# home_train
 
-### Overview
+A new Flutter project.
 
-This is an app that continuously detects the human body parts in the frames seen
-by your device's camera. These instructions walk you through building and
-running the demo on an iOS device. Camera captures are discarded immediately
-after use, nothing is stored or saved.
+## Getting Started
 
-The app demonstrates how to use 3 models:
-* Posenet
-* Movenet Lightning
-* Movenet Thunder
+This project is a starting point for a Flutter application.
 
-See this
-[blog post](https://blog.tensorflow.org/2021/08/pose-estimation-and-classification-on-edge-devices-with-MoveNet-and-TensorFlow-Lite.html)
-for a comparison between these models.
+A few resources to get you started if this is your first Flutter project:
 
-![Demo image](https://storage.googleapis.com/download.tensorflow.org/models/tflite/screenshots/posenet_ios_demo.gif)
+- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-## Build the demo using Xcode
-
-### Prerequisites
-
-*   [Xcode](https://developer.apple.com/xcode/) 12.5 or later
-*   A valid Apple Developer ID
-*   Real iOS device with camera
-*   iOS version 12.4 or above
-*   Xcode command line tools (to install, run `xcode-select --install`)
-*   CocoaPods (to install, run `sudo gem install cocoapods`)
-
-### Build and run the app
-
-1.  Clone the GitHub repository to your computer to get the
-    demo application.
-    
-
-1.  Install the pod to generate the workspace file:
-
-    ```
-    pod install
-    ```
-
-    Note: If you have installed this pod before and that command doesn't work,
-    try `pod update`. At the end of this step you should have a directory called
-    `PoseEstimation.xcworkspace`.
-
-1.  Open the project in Xcode with the following command:
-
-    ```
-    open PoseEstimation.xcworkspace
-    ```
-
-    This launches Xcode and opens the `PoseEstimation` project.
-
-1.  In Menu bar, select `Product` &rarr; `Destination` and choose your physical
-    device.
-
-1.  In Menu bar, select `Product` &rarr; `Run` to install the app on your
-    device.
-    
-1. In the Signing and Capabilities tab of the main PoseEstimation folder, select a team from the drop down and change he Bundle identifier to a unique name.
-
-1. Select the Product tab at the very top and the choose the destination to run the app.
-
-1. Then run the app using Product -> Run
-
-### Model used
-
-The pose estimation is downloaded by `RunScripts/download_models.sh`. The script
-is run automatically during the Xcode built process.
-
-If you explicitly want to download the models, you can download them from here:
-
-*   [Posenet](https://storage.googleapis.com/download.tensorflow.org/models/tflite/posenet_mobilenet_v1_100_257x257_multi_kpt_stripped.tflite)
-*   [Movenet Lightning](https://tfhub.dev/google/movenet/singlepose/lightning/)
-*   [Movenet Thunder](https://tfhub.dev/google/movenet/singlepose/thunder/)
+For help getting started with Flutter, view our
+[online documentation](https://flutter.dev/docs), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
