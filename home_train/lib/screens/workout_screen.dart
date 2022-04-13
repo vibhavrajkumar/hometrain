@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:home_train/components/workout_scroll.dart';
 import 'package:home_train/components/home_banner.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class WorkoutScreen extends StatefulWidget {
+  const WorkoutScreen({Key? key}) : super(key: key);
 
   @override
-  _HomeScreen createState() => _HomeScreen();
+  _WorkoutScreen createState() => _WorkoutScreen();
 }
 
-class _HomeScreen extends State<HomeScreen> {
+class _WorkoutScreen extends State<WorkoutScreen> {
   @override
   Widget build(BuildContext context) {
     //Home page includes the top banner and workout scroll
     return Column(
-      children: [const HomeBanner(), WorkoutScroll(1)],
+      children: [const HomeBanner(), WorkoutScroll(0)],
     );
   }
 }
