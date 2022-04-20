@@ -14,7 +14,7 @@ HomeTrain Blue: #R:00 G:42 B: 60
 HomeTrain Green: #R:00 G:5D B: 5C
 
 */
-List<Color> colorTransition(int num) {
+List<Color> colorTransition(int num, bool reverse) {
   var distance = Color.fromRGBO(
       homeTrainGreen.red - homeTrainBlue.red,
       homeTrainGreen.green - homeTrainBlue.green,
@@ -29,6 +29,5 @@ List<Color> colorTransition(int num) {
     var newRed = homeTrainBlue.red + (i * distance.red / (num - 1)).round();
     colors.add(Color.fromRGBO(newRed, newGreen, newBlue, 1));
   }
-
-  return colors;
+  return !reverse ? colors : colors.reversed.toList();
 }

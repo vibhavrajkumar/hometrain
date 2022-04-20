@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:home_train/screens/home_screen.dart';
 import 'package:home_train/constants.dart' as constants;
+import 'package:home_train/screens/workout_screen.dart';
+import 'package:home_train/screens/profile_screen.dart';
 
 class BottomNavbar extends StatefulWidget {
   const BottomNavbar({Key? key}) : super(key: key);
@@ -12,45 +14,20 @@ class BottomNavbar extends StatefulWidget {
 }
 
 class _BottomNavbar extends State<BottomNavbar> {
-  static const platform = MethodChannel('hometrain.test/battery');
-  static String _batteryLevel = 'Unknown battery level.';
-
-  // static String getBatteryState => _batteryLevel;
-
-  Future<void> _getBatteryLevel() async {
-    String batteryLevel;
-    try {
-      final int result = await platform.invokeMethod('getBatteryLevel');
-      batteryLevel = 'Battery level at $result % .';
-    } on PlatformException catch (e) {
-      batteryLevel = "Failed to get battery level: '${e.message}'.";
-    }
-
-    // print(batteryLevel);
-    setState(() {
-      _batteryLevel = batteryLevel;
-      print(_batteryLevel);
-    });
-  }
-
-  int _selectedIndex = 0;
+  int _selectedIndex = 1;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  //Place holder for what goes in body
-   static List<Widget> _widgetOptions = <Widget>[
-    Text(
-      _batteryLevel,
-      style: optionStyle,
-    ),
-    HomeScreen(),
-    Text(
-      'Index 2: Profile',
-      style: optionStyle,
-    ),
+
+  /*
+    This section creates 
+  */
+  static final List<Widget> _widgetOptions = <Widget>[
+    const WorkoutScreen(),
+    const HomeScreen(),
+    const ProfileScreen(),
   ];
 
   void _onItemTapped(int index) {
-    _getBatteryLevel();
     setState(() {
       _selectedIndex = index;
     });
