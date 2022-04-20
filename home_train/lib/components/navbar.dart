@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:home_train/screens/home_screen.dart';
 import 'package:home_train/constants.dart' as constants;
 import 'package:home_train/screens/workout_screen.dart';
+import 'package:home_train/screens/profile_screen.dart';
 
 class BottomNavbar extends StatefulWidget {
   const BottomNavbar({Key? key}) : super(key: key);
@@ -23,10 +24,7 @@ class _BottomNavbar extends State<BottomNavbar> {
   static final List<Widget> _widgetOptions = <Widget>[
     const WorkoutScreen(),
     const HomeScreen(),
-    const Text(
-      'Index 2: Profile',
-      style: optionStyle,
-    ),
+    const ProfileScreen(),
   ];
 
   void _onItemTapped(int index) {

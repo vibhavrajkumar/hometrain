@@ -1,17 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:home_train/constants.dart' as constants;
-import 'package:home_train/components/camera.dart';
-
-/*
-  Function to push camera display to the top of navigator.
-  Passed in to build on HomeScreen
-*/
-void goToCamera(BuildContext context) {
-  Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => CameraScreen()),
-  );
-}
 
 /*
   Takes in a list of labels to dynamically create a list of scrollable boxes
@@ -55,7 +43,7 @@ Widget getWorkoutBox(
         margin: const EdgeInsets.all(15),
       ),
       onTap: () {
-        tapEvent(context);
+        tapEvent(context, label);
       });
 }
 
@@ -63,15 +51,10 @@ Widget getWorkoutBox(
   Creates Widget for Workout Scroll
   Might make stateless later if it doesn't need to be dynamically updated
 */
-// ignore: must_be_immutable
 class WorkoutScroll extends StatefulWidget {
-  /*
-    0 -> Workout Page
-    1 -> Homepage
-
-  */
-  int pageType;
-  WorkoutScroll(this.pageType, {Key? key}) : super(key: key);
+  final Color color;
+  final Function tapEvent;
+  const WorkoutScroll(this.color, this.tapEvent, {Key? key}) : super(key: key);
 
   @override
   State<WorkoutScroll> createState() => _WorkoutScroll();
@@ -93,7 +76,8 @@ class _WorkoutScroll extends State<WorkoutScroll> {
             "Sit-Ups",
             "Squats",
             "Plank",
-          ], goToCamera, widget.pageType != 1, context)),
+          ], widget.tapEvent, widget.color == constants.homeTrainGreen,
+              context)),
     );
   }
 }
