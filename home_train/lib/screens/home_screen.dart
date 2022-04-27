@@ -34,7 +34,7 @@ class _HomeScreen extends State<HomeScreen> {
         right: 0,
         child: SvgPicture.asset(
           "images/man_workout.svg",
-          height: 150,
+          height: 90,
         ),
       )
     ];
