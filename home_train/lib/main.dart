@@ -35,9 +35,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Home Train',
       theme: ThemeData(primarySwatch: Colors.blue),
-      //home: const BottomNavbar(),
-      // home: const LoginPage(),
-      home: const MyHomePage(), 
+      home: const MyHomePage(),
     );
   }
 }
@@ -47,7 +45,7 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   //get dimensions to set sizes relative to size of screen 
+    //get dimensions to set sizes relative to size of screen
     double width = MediaQuery.of(context).size.width;
     double height =
         MediaQuery.of(context).size.height; //safearea (valid button locations)
@@ -56,7 +54,7 @@ class MyHomePage extends StatelessWidget {
         padding.top -
         padding.bottom; //total height (including unsafe area)
     return Scaffold(
-      //create widgets in a uniform line
+        //create widgets in a uniform line
         body: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,7 +62,7 @@ class MyHomePage extends StatelessWidget {
           Stack(
             children: <Widget>[
               Align(
-                alignment: FractionalOffset(0.2, 0.3),
+                alignment: const FractionalOffset(0.2, 0.3),
                 child: Image.asset(
                   "images/HomeTrainLogo.png",
                   width: width * 0.8,
@@ -80,11 +78,12 @@ class MyHomePage extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const Signin_Builder()),
+                          builder: (context) => const SigninBuilder(),
+                          fullscreenDialog: true),
                     );
                   },
                   child: Container(
-                    //create box with "log in" with correct colors
+                      //create box with "log in" with correct colors
                       height: 50,
                       width: 250,
                       color: Colors.transparent,
@@ -96,8 +95,10 @@ class MyHomePage extends StatelessWidget {
                           child: const Center(
                             child: Text(
                               "Log In",
-                              style:
-                                  TextStyle(fontSize: 20, color: Colors.white,fontFamily: 'Montserrat'),
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.white,
+                                  fontFamily: 'Montserrat'),
                               textAlign: TextAlign.center,
                             ),
                           ))),
@@ -108,13 +109,13 @@ class MyHomePage extends StatelessWidget {
                   bottom: 50,
                   right: 25,
                   child: TextButton(
-                    //when button is pressed, send to sign up page
+                      //when button is pressed, send to sign up page
                       onPressed: () {
                         Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const SignUp_Builder()),
-                    );
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SignUpBuilder()),
+                        );
                       },
                       child: Container(
                           height: 50,
@@ -129,7 +130,9 @@ class MyHomePage extends StatelessWidget {
                                 child: Text(
                                   "Sign Up",
                                   style: TextStyle(
-                                      fontSize: 20, color: Colors.white, fontFamily: 'Montserrat'),
+                                      fontSize: 20,
+                                      color: Colors.white,
+                                      fontFamily: 'Montserrat'),
                                   textAlign: TextAlign.center,
                                 ),
                               ))))),
@@ -137,5 +140,4 @@ class MyHomePage extends StatelessWidget {
           ),
         ]));
   }
-  }
-
+}
