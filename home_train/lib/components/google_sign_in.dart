@@ -18,7 +18,7 @@ class _LoginPage extends State<LoginPage> {
   final FirebaseAuth auth = FirebaseAuth.instance;
 
   Future<void> signup(BuildContext context) async {
-    debugPrint("Test 1 Adarsh");
+    //debugPrint("Test 1 Adarsh");
     final GoogleSignIn googleSignIn = GoogleSignIn();
     final GoogleSignInAccount? googleSignInAccount =
         await googleSignIn.signIn();

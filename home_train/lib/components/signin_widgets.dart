@@ -2,6 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:home_train/components/navbar.dart';
 import 'package:home_train/main.dart';
 
+import 'dart:html';
+
+import 'package:flutter/material.dart';
+import 'package:home_train/constants.dart' as constants;
+
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+
 class SigninBuilder extends StatefulWidget {
   //new widget for signin page
   const SigninBuilder({Key? key}) : super(key: key);
@@ -12,6 +20,36 @@ class SigninBuilder extends StatefulWidget {
 
 class _SignIn extends State<SigninBuilder> {
   //actual build of the signin page
+  final FirebaseAuth auth = FirebaseAuth.instance;
+
+  Future<void> signup(BuildContext context) async {
+    //debugPrint("Test 1 Adarsh");
+    final GoogleSignIn googleSignIn = GoogleSignIn();
+    final GoogleSignInAccount? googleSignInAccount =
+        await googleSignIn.signIn();
+    if (googleSignInAccount != null) {
+      final GoogleSignInAuthentication googleSignInAuthentication =
+          await googleSignInAccount.authentication;
+      final AuthCredential authCredential = GoogleAuthProvider.credential(
+          idToken: googleSignInAuthentication.idToken,
+          accessToken: googleSignInAuthentication.accessToken);
+
+      // Getting users credential
+      UserCredential result = await auth.signInWithCredential(authCredential);
+      User? user = result.user;
+
+      debugPrint("Test 1 Adarsh");
+
+      if (result != null) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => BottomNavbar()),
+        );
+      } // if result not null we simply call the MaterialpageRoute,
+      // for go to the HomePage screen
+  }
+  }
+   
   bool value = false;
   @override
   Widget build(BuildContext context) {
@@ -42,62 +80,55 @@ class _SignIn extends State<SigninBuilder> {
           //create text fields and login button
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            //textfield for username
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-              child: TextFormField(
-                decoration: const InputDecoration(
-                  border: UnderlineInputBorder(),
-                  labelText: 'Enter your username',
-                ),
-              ),
-            ),
-            Padding(
-              //textfield for password
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-              child: TextFormField(
-                obscureText: true,
-                decoration: const InputDecoration(
-                  border: UnderlineInputBorder(),
-                  labelText: 'Enter your password',
-                ),
-              ),
-            ),
-            Padding(
-              //create "Remember Me" checkbox
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-              child: Row(children: <Widget>[
-                // create in a uniform row
-                //text for checkbox
-                const Text(
-                  'Remember Me',
-                  style: TextStyle(
-                      color: Color.fromRGBO(0, 93, 92, 1.0),
-                      fontSize: 15,
-                      fontFamily: 'Montserrat'),
-                ),
-                //textbox with theme fill color
-                Checkbox(
-                    value: this.value,
-                    onChanged: (bool? value) {
-                      setState(() {
-                        this.value = value!;
-                      });
-                    },
-                    checkColor: Colors.white,
-                    activeColor: const Color.fromRGBO(0, 93, 92, 1.0))
-              ]),
-            ),
+          //   //textfield for username
+          //   Padding(
+          //     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+          //     child: TextFormField(
+          //       decoration: const InputDecoration(
+          //         border: UnderlineInputBorder(),
+          //         labelText: 'Enter your username',
+          //       ),
+          //     ),
+          //   ),
+          //   Padding(
+          //     //textfield for password
+          //     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+          //     child: TextFormField(
+          //       obscureText: true,
+          //       decoration: const InputDecoration(
+          //         border: UnderlineInputBorder(),
+          //         labelText: 'Enter your password',
+          //       ),
+          //     ),
+          //   ),
+          //   Padding(
+          //     //create "Remember Me" checkbox
+          //     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+          //     child: Row(children: <Widget>[
+          //       // create in a uniform row
+          //       //text for checkbox
+          //       const Text(
+          //         'Remember Me',
+          //         style: TextStyle(
+          //             color: Color.fromRGBO(0, 93, 92, 1.0),
+          //             fontSize: 15,
+          //             fontFamily: 'Montserrat'),
+          //       ),
+          //       //textbox with theme fill color
+          //       Checkbox(
+          //           value: this.value,
+          //           onChanged: (bool? value) {
+          //             setState(() {
+          //               this.value = value!;
+          //             });
+          //           },
+          //           checkColor: Colors.white,
+          //           activeColor: const Color.fromRGBO(0, 93, 92, 1.0))
+          //     ]),
+          //   ),
             TextButton(
               //todo (link with firebase when "login" pressed)
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const BottomNavbar(),
-                      fullscreenDialog: true),
-                );
-              },
+              onPressed: () => signup(context),
               child: Container(
                   //create login button with correct colors and rounded edges
                   height: 50,
@@ -123,6 +154,8 @@ class _SignIn extends State<SigninBuilder> {
         ));
   }
 }
+  
+
 
 class SignUpBuilder extends StatefulWidget {
   //widget for the signup page
@@ -221,3 +254,4 @@ class _SignUp extends State<SignUpBuilder> {
         ));
   }
 }
+
