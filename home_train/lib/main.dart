@@ -1,11 +1,10 @@
 import 'dart:async';
-import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:home_train/components/login_in.dart';
-import 'components/navbar.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:camera/camera.dart';
 import 'components/signin_widgets.dart';
+import 'package:home_train/firebase_options.dart';
 
 List<CameraDescription> cameras = [];
 
@@ -20,7 +19,9 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
 // initializing the firebase app
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
 // calling of runApp
   runApp(const MyApp());
@@ -37,8 +38,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(primarySwatch: Colors.blue),
       //home: const BottomNavbar(),
       home: const LoginPage(),
-      //home: const MyHomePage(), 
-    
+      //home: const MyHomePage(),
     );
   }
 }
