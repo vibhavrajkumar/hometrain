@@ -1,11 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:home_train/components/navbar.dart';
-import 'package:home_train/main.dart';
-
-import 'dart:html';
-
-import 'package:flutter/material.dart';
-import 'package:home_train/constants.dart' as constants;
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
