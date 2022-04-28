@@ -37,8 +37,8 @@ class MyApp extends StatelessWidget {
       title: 'Home Train',
       theme: ThemeData(primarySwatch: Colors.blue),
       //home: const BottomNavbar(),
-      home: const LoginPage(),
-      //home: const MyHomePage(),
+      // home: const LoginPage(),
+      home: const MyHomePage(),
     );
   }
 }
