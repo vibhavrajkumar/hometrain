@@ -2,27 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:home_train/components/navbar.dart';
 import 'package:home_train/main.dart';
 
-class Signin_Builder extends StatefulWidget {
+class SigninBuilder extends StatefulWidget {
   //new widget for signin page
-  const Signin_Builder({Key? key}) : super(key: key);
+  const SigninBuilder({Key? key}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _signin();
+  State<StatefulWidget> createState() => _SignIn();
 }
 
-class _signin extends State<Signin_Builder> {
+class _SignIn extends State<SigninBuilder> {
   //actual build of the signin page
-  bool value = false; 
+  bool value = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //create an app bar (bar on the top portion of the screen)
+        //create an app bar (bar on the top portion of the screen)
         appBar: AppBar(
           shape: const ContinuousRectangleBorder(
-            //give the bar rounded edges on the bottom to make it cleaner
-            borderRadius:BorderRadius.only(
-              bottomLeft: Radius.circular(20.0), bottomRight: Radius.circular(20.0))),
-          backgroundColor: const Color.fromRGBO(0, 93, 92, 1.0), 
+              //give the bar rounded edges on the bottom to make it cleaner
+              borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(20.0),
+                  bottomRight: Radius.circular(20.0))),
+          backgroundColor: const Color.fromRGBO(0, 93, 92, 1.0),
           leading: Builder(
             builder: (BuildContext context) {
               //create back button, when pressed will return to previous screen
@@ -35,13 +36,13 @@ class _signin extends State<Signin_Builder> {
             },
           ),
           title: const Text('Sign In',
-            style: TextStyle(color: Colors.white, fontFamily: 'Montserrat')),
+              style: TextStyle(color: Colors.white, fontFamily: 'Montserrat')),
         ),
         body: Column(
-          //create text fields and login button 
+          //create text fields and login button
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            //textfield for username 
+            //textfield for username
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
               child: TextFormField(
@@ -55,6 +56,7 @@ class _signin extends State<Signin_Builder> {
               //textfield for password
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
               child: TextFormField(
+                obscureText: true,
                 decoration: const InputDecoration(
                   border: UnderlineInputBorder(),
                   labelText: 'Enter your password',
@@ -62,35 +64,42 @@ class _signin extends State<Signin_Builder> {
               ),
             ),
             Padding(
-              //create "Remember Me" checkbox 
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-            child: Row(children: <Widget>[ 
-              // create in a uniform row 
-              //text for checkbox
-              const Text('Remember Me', style:TextStyle(
-                color: Color.fromRGBO(0,93,92,1.0),
-                fontSize: 15,
-                fontFamily: 'Montserrat'
-              ),),
-              //textbox with theme fill color
-              Checkbox(value: this.value, onChanged: (bool? value){
-                setState(() {
-                  this.value = value!; 
-                });
-              },checkColor: Colors.white,activeColor: const Color.fromRGBO(0, 93, 92, 1.0))
-            ]),
+              //create "Remember Me" checkbox
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+              child: Row(children: <Widget>[
+                // create in a uniform row
+                //text for checkbox
+                const Text(
+                  'Remember Me',
+                  style: TextStyle(
+                      color: Color.fromRGBO(0, 93, 92, 1.0),
+                      fontSize: 15,
+                      fontFamily: 'Montserrat'),
+                ),
+                //textbox with theme fill color
+                Checkbox(
+                    value: this.value,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        this.value = value!;
+                      });
+                    },
+                    checkColor: Colors.white,
+                    activeColor: const Color.fromRGBO(0, 93, 92, 1.0))
+              ]),
             ),
             TextButton(
               //todo (link with firebase when "login" pressed)
               onPressed: () {
                 Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const BottomNavbar()),
-                    );
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const BottomNavbar(),
+                      fullscreenDialog: true),
+                );
               },
               child: Container(
-                //create login button with correct colors and rounded edges
+                  //create login button with correct colors and rounded edges
                   height: 50,
                   width: 100,
                   color: Colors.transparent,
@@ -102,7 +111,10 @@ class _signin extends State<Signin_Builder> {
                       child: const Center(
                         child: Text(
                           "Log In",
-                          style: TextStyle(fontSize: 20, color: Colors.white, fontFamily: 'Montserrat'),
+                          style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.white,
+                              fontFamily: 'Montserrat'),
                           textAlign: TextAlign.center,
                         ),
                       ))),
@@ -112,25 +124,25 @@ class _signin extends State<Signin_Builder> {
   }
 }
 
-
-class SignUp_Builder extends StatefulWidget {
+class SignUpBuilder extends StatefulWidget {
   //widget for the signup page
-  const SignUp_Builder({Key? key}) : super(key: key);
+  const SignUpBuilder({Key? key}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _signup();
+  State<StatefulWidget> createState() => _SignUp();
 }
 
-class _signup extends State<SignUp_Builder> {
+class _SignUp extends State<SignUpBuilder> {
   //build of the signup page
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //create top bar of the signup page with rounded bottom borders
+        //create top bar of the signup page with rounded bottom borders
         appBar: AppBar(
           shape: const ContinuousRectangleBorder(
-            borderRadius:BorderRadius.only(
-              bottomLeft: Radius.circular(20.0), bottomRight: Radius.circular(20.0))),
+              borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(20.0),
+                  bottomRight: Radius.circular(20.0))),
           backgroundColor: const Color.fromRGBO(0, 93, 92, 1.0),
           leading: Builder(
             builder: (BuildContext context) {
@@ -143,14 +155,14 @@ class _signup extends State<SignUp_Builder> {
               );
             },
           ),
-          title: const Text('Sign Up',style: TextStyle(
-            color: Colors.white, fontFamily: 'Montserrat')),
+          title: const Text('Sign Up',
+              style: TextStyle(color: Colors.white, fontFamily: 'Montserrat')),
         ),
         body: Column(
-          //create text fields and signup button align in a column 
+          //create text fields and signup button align in a column
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            //create username creation textfield 
+            //create username creation textfield
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
               child: TextFormField(
@@ -164,6 +176,7 @@ class _signup extends State<SignUp_Builder> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
               child: TextFormField(
+                obscureText: true,
                 decoration: const InputDecoration(
                   border: UnderlineInputBorder(),
                   labelText: 'Password',
@@ -174,6 +187,7 @@ class _signup extends State<SignUp_Builder> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
               child: TextFormField(
+                obscureText: true,
                 decoration: const InputDecoration(
                   border: UnderlineInputBorder(),
                   labelText: 'Confirm Password',
@@ -195,7 +209,10 @@ class _signup extends State<SignUp_Builder> {
                       child: const Center(
                         child: Text(
                           "Sign Up",
-                          style: TextStyle(fontSize: 20, color: Colors.white, fontFamily: 'Montserrat'),
+                          style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.white,
+                              fontFamily: 'Montserrat'),
                           textAlign: TextAlign.center,
                         ),
                       ))),
