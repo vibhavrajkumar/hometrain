@@ -26,7 +26,8 @@ class _ProfileScreen extends State<ProfileScreen> {
       GenericBanner(
         homeTrainGreen,
         text: "Let's Profile!",
-      )
+      ),
+      //TextButton(onPressed: () {Navigator.pop(context);}, child: Container()),
     ]));
 
     //TODO: Add Profile Display/Info

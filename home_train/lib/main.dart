@@ -20,7 +20,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
 // initializing the firebase app
-  // await Firebase.initializeApp();
+  await Firebase.initializeApp();
 
 // calling of runApp
   runApp(const MyApp());
@@ -36,8 +36,9 @@ class MyApp extends StatelessWidget {
       title: 'Home Train',
       theme: ThemeData(primarySwatch: Colors.blue),
       //home: const BottomNavbar(),
-      // home: const LoginPage(),
-      home: const MyHomePage(), 
+      home: const LoginPage(),
+      //home: const MyHomePage(), 
+    
     );
   }
 }
