@@ -32,8 +32,6 @@ class _SignIn extends State<SigninBuilder> {
       UserCredential result = await auth.signInWithCredential(authCredential);
       User? user = result.user;
 
-      debugPrint("Test 1 Adarsh");
-
       if (result != null) {
         Navigator.push(
           context,
@@ -41,9 +39,9 @@ class _SignIn extends State<SigninBuilder> {
         );
       } // if result not null we simply call the MaterialpageRoute,
       // for go to the HomePage screen
+    }
   }
-  }
-   
+
   bool value = false;
   @override
   Widget build(BuildContext context) {
@@ -74,52 +72,52 @@ class _SignIn extends State<SigninBuilder> {
           //create text fields and login button
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-          //   //textfield for username
-          //   Padding(
-          //     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-          //     child: TextFormField(
-          //       decoration: const InputDecoration(
-          //         border: UnderlineInputBorder(),
-          //         labelText: 'Enter your username',
-          //       ),
-          //     ),
-          //   ),
-          //   Padding(
-          //     //textfield for password
-          //     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-          //     child: TextFormField(
-          //       obscureText: true,
-          //       decoration: const InputDecoration(
-          //         border: UnderlineInputBorder(),
-          //         labelText: 'Enter your password',
-          //       ),
-          //     ),
-          //   ),
-          //   Padding(
-          //     //create "Remember Me" checkbox
-          //     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-          //     child: Row(children: <Widget>[
-          //       // create in a uniform row
-          //       //text for checkbox
-          //       const Text(
-          //         'Remember Me',
-          //         style: TextStyle(
-          //             color: Color.fromRGBO(0, 93, 92, 1.0),
-          //             fontSize: 15,
-          //             fontFamily: 'Montserrat'),
-          //       ),
-          //       //textbox with theme fill color
-          //       Checkbox(
-          //           value: this.value,
-          //           onChanged: (bool? value) {
-          //             setState(() {
-          //               this.value = value!;
-          //             });
-          //           },
-          //           checkColor: Colors.white,
-          //           activeColor: const Color.fromRGBO(0, 93, 92, 1.0))
-          //     ]),
-          //   ),
+            //   //textfield for username
+            //   Padding(
+            //     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+            //     child: TextFormField(
+            //       decoration: const InputDecoration(
+            //         border: UnderlineInputBorder(),
+            //         labelText: 'Enter your username',
+            //       ),
+            //     ),
+            //   ),
+            //   Padding(
+            //     //textfield for password
+            //     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+            //     child: TextFormField(
+            //       obscureText: true,
+            //       decoration: const InputDecoration(
+            //         border: UnderlineInputBorder(),
+            //         labelText: 'Enter your password',
+            //       ),
+            //     ),
+            //   ),
+            //   Padding(
+            //     //create "Remember Me" checkbox
+            //     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+            //     child: Row(children: <Widget>[
+            //       // create in a uniform row
+            //       //text for checkbox
+            //       const Text(
+            //         'Remember Me',
+            //         style: TextStyle(
+            //             color: Color.fromRGBO(0, 93, 92, 1.0),
+            //             fontSize: 15,
+            //             fontFamily: 'Montserrat'),
+            //       ),
+            //       //textbox with theme fill color
+            //       Checkbox(
+            //           value: this.value,
+            //           onChanged: (bool? value) {
+            //             setState(() {
+            //               this.value = value!;
+            //             });
+            //           },
+            //           checkColor: Colors.white,
+            //           activeColor: const Color.fromRGBO(0, 93, 92, 1.0))
+            //     ]),
+            //   ),
             TextButton(
               //todo (link with firebase when "login" pressed)
               onPressed: () => signup(context),
@@ -148,8 +146,6 @@ class _SignIn extends State<SigninBuilder> {
         ));
   }
 }
-  
-
 
 class SignUpBuilder extends StatefulWidget {
   //widget for the signup page
@@ -248,4 +244,3 @@ class _SignUp extends State<SignUpBuilder> {
         ));
   }
 }
-
