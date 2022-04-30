@@ -24,6 +24,7 @@ class _ProfileScreen extends State<ProfileScreen> {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance; 
   getProfileImage(){
     if(_firebaseAuth.currentUser?.photoURL != null){
+
       return Image.network(_firebaseAuth.currentUser!.photoURL!, height: 50,width: 50);
     }
     else{
@@ -33,11 +34,13 @@ class _ProfileScreen extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance; 
+
     return Scaffold(
         body: Column(children:  [
-      const GenericBanner(
+       GenericBanner(
         homeTrainGreen,
-        text: "Let's Profile!",
+        text: "Let's Profile, " + _firebaseAuth.currentUser!.displayName! + "!",
       ),
       getProfileImage(), 
       //TextButton(onPressed: () {Navigator.pop(context);}, child: Container()),
