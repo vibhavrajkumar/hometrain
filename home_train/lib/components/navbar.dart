@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:home_train/screens/home_screen.dart';
 import 'package:home_train/constants.dart' as constants;
 import 'package:home_train/screens/workout_screen.dart';
@@ -50,7 +51,8 @@ class _BottomNavbar extends State<BottomNavbar> {
             label: 'Workouts',
           ),
           BottomNavigationBarItem(
-            icon: Image.asset("images/HomeTrainLogo.png"),
+            icon: SvgPicture.asset("images/HomeTrainLogo.svg",
+                height: 20, width: 20, fit: BoxFit.scaleDown),
             // icon: Icon(Icons.home_outlined),
             label: 'Home',
           ),
