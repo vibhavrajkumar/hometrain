@@ -42,7 +42,7 @@ dependencies:
   video_player: ^2.2.19
   firebase_auth: ^3.3.9
   google_sign_in: ^5.2.4
-  cloud_firestore: ^1.0.3
+  cloud_firestore: ^3.1.0
 
   #cupertino_icons: ^1.0.2
   fl_chart: ^0.35.0
