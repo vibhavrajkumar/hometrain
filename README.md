@@ -5,9 +5,9 @@ Our app seeks to provide free, real-time feedback for basic exercises to improve
 ## Functionality
 The app includes two main features: workout detection and workout tracking. 
 
-- Workout Detection: Utilizes computer vision technology to provide real-time feedback on the correctness of the users push-up and plank form. This technology was built using a TFLite model and thhe MoveNet library. 
+- Workout Tracking: Utilizes computer vision technology to provide real-time feedback on the correctness of the users push-up and plank form. This technology was built using a TFLite model and thhe MoveNet library. 
 
-- Workout Tracking: Fetches data from the firestore database and displays statistics on an interactive line graph for each workout. 
+- Workout Analytics: Fetches data from the firestore database and displays statistics on an interactive line graph for each workout. 
 
 ## Technical Architecture
 
@@ -33,4 +33,6 @@ The app includes two main features: workout detection and workout tracking.
 4. Open an emulator or plug an iOS device in (plugging in a device is highly recommended) 
 5. Run `pod install` 
 6. Open the PoseEstimation Workspace and run the build 
+7. Make sure your entire body is captured within the camera screen 
+   for optimal performance when trying a push-up or a plank (at the least, shoulders to ankles)
 
