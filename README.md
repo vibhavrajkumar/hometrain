@@ -5,7 +5,7 @@ Our app seeks to provide free, real-time feedback for basic exercises to improve
 ## Functionality
 The app includes two main features: workout detection and workout tracking. 
 
-- Workout Detection: utilizes computer vision technology to determine the correctness of the users push-ups, planks, sit-ups, and squats. This technology was built using a TFLite model and thhe MoveNet library. 
+- Workout Detection: Utilizes computer vision technology to provide real-time feedback on the correctness of the users push-up and plank form. This technology was built using a TFLite model and thhe MoveNet library. 
 
 - Workout Tracking: Fetches data from the firestore database and displays statistics on an interactive line graph for each workout. 
 
