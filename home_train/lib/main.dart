@@ -48,39 +48,3 @@ class MyHomePage extends StatelessWidget {
     return const SigninBuilder();
   }
 }
-
-// Positioned(
-//                 bottom: 150,
-//                 right: 25,
-//                 child: TextButton(
-//                   onPressed: () {
-//                     //send to SignInBuilder page when button is pressed
-//                     Navigator.push(
-//                       context,
-//                       MaterialPageRoute(
-//                           builder: (context) => const SigninBuilder(),
-//                           fullscreenDialog: true),
-//                     );
-//                   },
-//                   child: Container(
-//                       //create box with "log in" with correct colors
-//                       height: 50,
-//                       width: 250,
-//                       color: Colors.transparent,
-//                       child: Container(
-//                           decoration: const BoxDecoration(
-//                               color: Color.fromRGBO(0, 93, 92, 1.0),
-//                               borderRadius:
-//                                   BorderRadius.all(Radius.circular(20.0))),
-//                           child: const Center(
-//                             child: Text(
-//                               "Log In",
-//                               style: TextStyle(
-//                                   fontSize: 20,
-//                                   color: Colors.white,
-//                                   fontFamily: 'Montserrat'),
-//                               textAlign: TextAlign.center,
-//                             ),
-//                           ))),
-//                 ),
-//               ),
