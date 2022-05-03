@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:camera/camera.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'components/signin_widgets.dart';
 import 'package:home_train/firebase_options.dart';
 
@@ -48,92 +47,42 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //get dimensions to set sizes relative to size of screen
-    double width = MediaQuery.of(context).size.width;
-    double height =
-        MediaQuery.of(context).size.height; //safearea (valid button locations)
-    var padding = MediaQuery.of(context).padding;
-    double total_height = height -
-        padding.top -
-        padding.bottom; //total height (including unsafe area)
-    return Scaffold(
-        //create widgets in a uniform line
-        body: Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          SvgPicture.asset("images/HomeTrainLogo.svg",
-              height: 100, width: 100, fit: BoxFit.scaleDown), //logo
-          //create button for login page
-          TextButton(
-            onPressed: () {
-              //send to SignInBuilder page when button is pressed
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const SigninBuilder(),
-                    fullscreenDialog: true),
-              );
-            },
-            child: Container(
-                //create box with "log in" with correct colors
-                height: 50,
-                width: 250,
-                color: Colors.transparent,
-                child: Container(
-                    decoration: const BoxDecoration(
-                        color: Color.fromRGBO(0, 93, 92, 1.0),
-                        borderRadius: BorderRadius.all(Radius.circular(20.0))),
-                    child: const Center(
-                      child: Text(
-                        "Log In",
-                        style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.white,
-                            fontFamily: 'Montserrat'),
-                        textAlign: TextAlign.center,
-                      ),
-                    ))),
-          ),
-          //create box with "sign up and correct colors"
-          TextButton(
-              //when button is pressed, send to sign up page
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const SignUpBuilder()),
-                );
-              },
-              child: Container(
-                  height: 50,
-                  width: 250,
-                  color: Colors.transparent,
-                  child: Container(
-                      decoration: const BoxDecoration(
-                          color: Color.fromRGBO(0, 66, 96, 1.0),
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(20.0))),
-                      child: const Center(
-                        child: Text(
-                          "Sign Up",
-                          style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.white,
-                              fontFamily: 'Montserrat'),
-                          textAlign: TextAlign.center,
-                        ),
-                      )))),
-        ]
-            .map(
-              (child) => Padding(
-                padding: EdgeInsets.all(height / 20),
-                child: child,
-              ),
-            )
-            .toList(),
-      ),
-    ));
+    return const SigninBuilder();
   }
 }
+
+// Positioned(
+//                 bottom: 150,
+//                 right: 25,
+//                 child: TextButton(
+//                   onPressed: () {
+//                     //send to SignInBuilder page when button is pressed
+//                     Navigator.push(
+//                       context,
+//                       MaterialPageRoute(
+//                           builder: (context) => const SigninBuilder(),
+//                           fullscreenDialog: true),
+//                     );
+//                   },
+//                   child: Container(
+//                       //create box with "log in" with correct colors
+//                       height: 50,
+//                       width: 250,
+//                       color: Colors.transparent,
+//                       child: Container(
+//                           decoration: const BoxDecoration(
+//                               color: Color.fromRGBO(0, 93, 92, 1.0),
+//                               borderRadius:
+//                                   BorderRadius.all(Radius.circular(20.0))),
+//                           child: const Center(
+//                             child: Text(
+//                               "Log In",
+//                               style: TextStyle(
+//                                   fontSize: 20,
+//                                   color: Colors.white,
+//                                   fontFamily: 'Montserrat'),
+//                               textAlign: TextAlign.center,
+//                             ),
+//                           ))),
+//                 ),
+//               ),
