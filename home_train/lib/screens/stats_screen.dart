@@ -40,7 +40,7 @@ class _StatsScreen extends State<StatsScreen> {
       List data = snapshot[widget.workout];
 
       for (int i = 0; i < data.length; ++i) {
-        spots.add(FlSpot(i + 1, data[i]));
+        spots.add(FlSpot((i + 1.0), data[i] + 0.0));
       }
     });
 
