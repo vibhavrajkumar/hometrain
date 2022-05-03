@@ -35,6 +35,12 @@ class _StatsScreen extends State<StatsScreen> {
       GenericBanner(
         homeTrainBlue,
         text: topText,
+        children: [
+          SizedBox(
+            height: 20,
+            width: 20,
+            child: IconButton(onPressed: () {Navigator.pop(context);} , icon: const Icon(Icons.arrow_back), color: Colors.white), )
+        ],
       ),
       const SizedBox(
         height: 20,
