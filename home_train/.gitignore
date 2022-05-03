@@ -47,3 +47,5 @@ app.*.map.json
 
 .DS_Store
 .DS_Store?
+
+local.properties

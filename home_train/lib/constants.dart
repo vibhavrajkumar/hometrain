@@ -3,6 +3,12 @@ import 'package:flutter/material.dart';
 //Main colors
 const homeTrainBlue = Color.fromRGBO(00, 42, 60, 1);
 const homeTrainGreen = Color.fromRGBO(00, 93, 92, 1);
+const workouts = [
+  "Push-Ups",
+  "Sit-Ups",
+  "Squats",
+  "Plank",
+];
 
 /*
 Given a number greater than or equal to 2, creates a "choppy" gradient
