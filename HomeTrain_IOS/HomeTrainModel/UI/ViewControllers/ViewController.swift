@@ -23,6 +23,7 @@ final class ViewController: UIViewController {
   // MARK: Storyboards Connections
   @IBOutlet private weak var overlayView: OverlayView!
   @IBOutlet private weak var timerLabel: UILabel!
+  @IBOutlet private weak var formLabel: UILabel!
   @IBOutlet private weak var threadStepperLabel: UILabel!
   @IBOutlet private weak var threadStepper: UIStepper!
   @IBOutlet private weak var totalTimeLabel: UILabel!
@@ -233,6 +234,11 @@ extension ViewController: CameraFeedManagerDelegate {
           }
         
           let angle = self.overlayView.drawForm(at: image, person: result)
+            if(angle < 15) {
+                self.formLabel.text = "Good Form";
+            } else {
+                self.formLabel.text = "Straighten Back";
+            }
           self.timerLabel.text = String(angle)
         }
       } catch {

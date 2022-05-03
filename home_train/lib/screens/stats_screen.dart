@@ -32,6 +32,10 @@ class _StatsScreen extends State<StatsScreen> {
   final User? user = FirebaseAuth.instance.currentUser;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
+  /*
+  Fetches points data from firestore for the current user and adds it to a list of FLSpots, which is displayed
+  on the graph
+  */
   List<FlSpot> generatePoints() {
     var docRef = _firestore.collection("users").doc(user!.uid);
     List<FlSpot> spots = [];
@@ -53,6 +57,7 @@ class _StatsScreen extends State<StatsScreen> {
     List<FlSpot> spots = generatePoints();
     num maxY = 6;
 
+    //finds the max y value in spots to resize teh graph
     for (int i = 0; i < spots.length; i++) {
       maxY = spots[i].y > maxY ? spots[i].y : maxY;
     }
@@ -62,6 +67,7 @@ class _StatsScreen extends State<StatsScreen> {
       homeTrainBlue,
       homeTrainGreen,
     ];
+
     return Scaffold(
         body: Column(children: [
       GenericBanner(
@@ -83,6 +89,7 @@ class _StatsScreen extends State<StatsScreen> {
       const SizedBox(
         height: 20,
       ),
+      //Box to put Line Chart in
       Padding(
         padding: const EdgeInsets.only(left: 20, right: 20),
         child: Container(
@@ -105,8 +112,8 @@ class _StatsScreen extends State<StatsScreen> {
                   width: size.width - 20,
                   height: 200,
                   child: LineChart(
-                      /////////////////***********CITATION: https://www.codeplayon.com/2021/10/how-to-make-line-charts-in-flutter/*****************///////////////// */
-
+                      //CITATION: https://www.codeplayon.com/2021/10/how-to-make-line-charts-in-flutter/
+                      //Line Chart Data containing points and axis titles
                       LineChartData(
                     gridData: FlGridData(
                       show: true,
@@ -166,61 +173,6 @@ class _StatsScreen extends State<StatsScreen> {
           ),
         ),
       ),
-      // SizedBox(height: 20),
-      // Wrap(
-      //   spacing: 20,
-      //   children: [
-      //     Padding(
-      //         padding: const EdgeInsets.only(
-      //             left: 25, right: 25, top: 20, bottom: 20),
-      //         child: Column(
-      //           crossAxisAlignment: CrossAxisAlignment.start,
-      //           children: [
-      //             GestureDetector(
-      //                 onTap: () {
-      //                   counter--;
-      //                   if (counter < 0) {
-      //                     counter = 0;
-      //                   }
-      //                 },
-      //                 child: Container(
-      //                     width: 40,
-      //                     height: 40,
-      //                     decoration: BoxDecoration(
-      //                         color: homeTrainGreen, shape: BoxShape.circle),
-      //                     child: Icon(Icons.arrow_back, color: Colors.white)))
-      //           ],
-      //         )),
-      //     Padding(
-      //         padding: const EdgeInsets.only(
-      //             left: 25, right: 25, top: 20, bottom: 20),
-      //         child: Column(
-      //           crossAxisAlignment: CrossAxisAlignment.start,
-      //           children: [
-      //             GestureDetector(
-      //                 onTap: () {
-      //                   counter++;
-      //                   if (counter > 11) {
-      //                     counter = 11;
-      //                   }
-      //                 },
-      //                 child: Container(
-      //                     width: 40,
-      //                     height: 40,
-      //                     decoration: BoxDecoration(
-      //                         color: homeTrainBlue, shape: BoxShape.circle),
-      //                     child:
-      //                         Icon(Icons.arrow_forward, color: Colors.white)))
-      //           ],
-      //         ))
-      //   ],
-      // ),
-      // SizedBox(height: 20),
-      // Text(spots[counter].y.toString(),
-      //     textAlign: TextAlign.center,
-      //     style: TextStyle(color: Colors.black, fontSize: 30))
     ]));
   }
 }
-
-//TODO: Generalize to show all users' stats

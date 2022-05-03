@@ -9,7 +9,6 @@ import 'package:google_sign_in/google_sign_in.dart';
   Screen for displaying the user's Profile.
 
   @params:
-  TODO: ADD PROFILE FEATURES
 */
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
