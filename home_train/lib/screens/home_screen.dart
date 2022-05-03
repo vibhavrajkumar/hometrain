@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:home_train/components/generic_banner.dart';
 import 'package:home_train/components/workout_scroll.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:home_train/constants.dart';
 import 'package:home_train/components/camera.dart';
+import 'dart:math';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -13,17 +16,29 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreen extends State<HomeScreen> {
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final User? user = FirebaseAuth.instance.currentUser;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
   /*
   Function to push camera display to the top of navigator.
   Passed in to build on HomeScreen
 
   @param String _ => dummy argument to allow for name-passing capabilities
 */
-  void goToCamera(BuildContext context, [String? _]) {
+  void goToCamera(BuildContext context, String label) {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => CameraScreen()),
     );
+
+    var docRef = _firestore.collection("users").doc(user!.uid);
+
+    docRef.get().then((snapshot) {
+      List<dynamic> nums = snapshot[label];
+      nums.add(Random().nextInt(6).toDouble());
+      docRef.update({label: nums});
+    });
   }
 
   @override

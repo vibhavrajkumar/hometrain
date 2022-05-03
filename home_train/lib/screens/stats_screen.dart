@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:home_train/components/generic_banner.dart';
 import 'package:home_train/constants.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:math';
+import 'package:collection/collection.dart';
 
 /*
   Screen for displaying the user's stats.
@@ -24,19 +27,36 @@ class StatsScreen extends StatefulWidget {
 */
 class _StatsScreen extends State<StatsScreen> {
   var rng = Random();
+
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final User? user = FirebaseAuth.instance.currentUser;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  List<FlSpot> generatePoints() {
+    var docRef = _firestore.collection("users").doc(user!.uid);
+    List<FlSpot> spots = [];
+
+    docRef.get().then((snapshot) {
+      List data = snapshot[widget.workout];
+
+      for (int i = 0; i < data.length; ++i) {
+        spots.add(FlSpot(i + 1, data[i]));
+      }
+    });
+
+    return spots;
+  }
+
   @override
   Widget build(BuildContext context) {
-    var counter = 0;
     var size = MediaQuery.of(context).size;
-    List<FlSpot> spots = [
-      FlSpot(0, rng.nextInt(6).toDouble()),
-      FlSpot(2.6, rng.nextInt(6).toDouble()),
-      FlSpot(4.9, rng.nextInt(6).toDouble()),
-      FlSpot(6.8, rng.nextInt(6).toDouble()),
-      FlSpot(8, rng.nextInt(6).toDouble()),
-      FlSpot(9.5, rng.nextInt(6).toDouble()),
-      FlSpot(11, rng.nextInt(6).toDouble()),
-    ];
+    List<FlSpot> spots = generatePoints();
+    num maxY = 6;
+
+    for (int i = 0; i < spots.length; i++) {
+      maxY = spots[i].y > maxY ? spots[i].y : maxY;
+    }
+
     String topText = widget.workout + " Analytics";
     List<Color> gradientColors = [
       homeTrainBlue,
@@ -51,7 +71,13 @@ class _StatsScreen extends State<StatsScreen> {
           SizedBox(
             height: 20,
             width: 20,
-            child: IconButton(onPressed: () {Navigator.pop(context);} , icon: const Icon(Icons.arrow_back), color: Colors.white), )
+            child: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const Icon(Icons.arrow_back),
+                color: Colors.white),
+          )
         ],
       ),
       const SizedBox(
@@ -104,8 +130,8 @@ class _StatsScreen extends State<StatsScreen> {
                       show: true,
                       rightTitle: AxisTitle(showTitle: false),
                       topTitle: AxisTitle(showTitle: false),
-                      bottomTitle:
-                          AxisTitle(showTitle: true, titleText: "Days"),
+                      bottomTitle: AxisTitle(
+                          showTitle: true, titleText: "Workout Number"),
                       leftTitle:
                           AxisTitle(showTitle: true, titleText: widget.workout),
                     ),
@@ -113,10 +139,10 @@ class _StatsScreen extends State<StatsScreen> {
                         show: true,
                         border: Border.all(
                             color: const Color(0xff37434d), width: 1)),
-                    minX: 0,
-                    maxX: 11,
+                    minX: 1,
+                    maxX: max(spots.length.toDouble(), 15),
                     minY: 0,
-                    maxY: 6,
+                    maxY: maxY.toDouble(),
                     lineBarsData: [
                       LineChartBarData(
                         spots: spots,
