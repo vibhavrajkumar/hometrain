@@ -70,7 +70,7 @@ class OverlayView: UIImageView {
     self.image = newImage
   }
     
-func drawForm(at image: UIImage, person: Person) -> Bool{
+func drawForm(at image: UIImage, person: Person) -> Int{
   if context == nil {
     UIGraphicsBeginImageContext(image.size)
     guard let context = UIGraphicsGetCurrentContext() else {
@@ -78,7 +78,8 @@ func drawForm(at image: UIImage, person: Person) -> Bool{
     }
     self.context = context
   }
-  guard let strokes = strokes(from: person) else { return false}
+    
+  guard let strokes = strokes(from: person) else { return 0}
   image.draw(at: .zero)
   context.setLineWidth(Config.dot.radius)
     
@@ -92,7 +93,7 @@ func drawForm(at image: UIImage, person: Person) -> Bool{
   let dotProd = (v1_x*v2_x) + (v1_y*v2_y);
   let mags = sqrt(pow(v1_x,2) + pow(v1_y,2)) * sqrt(pow(v2_x,2) + pow(v2_y,2));
   let angle = acos(dotProd/mags)*180/Double.pi;
-  print(angle);
+//  print(angle);
   let straightBack = angle < 15;
     
   context.move(to: CGPoint(x: lShoulderPoint.x, y: lShoulderPoint.y));
@@ -108,7 +109,7 @@ func drawForm(at image: UIImage, person: Person) -> Bool{
   context.strokePath()
   guard let newImage = UIGraphicsGetImageFromCurrentImageContext() else { fatalError() }
   self.image = newImage
-  return straightBack;
+  return Int(angle);
 }
 
   /// Draw the dots (i.e. keypoints).

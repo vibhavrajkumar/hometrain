@@ -17,10 +17,12 @@ import AVFoundation
 import UIKit
 import os
 
+@available(iOS 13.0, *)
 final class ViewController: UIViewController {
 
   // MARK: Storyboards Connections
   @IBOutlet private weak var overlayView: OverlayView!
+  @IBOutlet private weak var timerLabel: UILabel!
   @IBOutlet private weak var threadStepperLabel: UILabel!
   @IBOutlet private weak var threadStepper: UIStepper!
   @IBOutlet private weak var totalTimeLabel: UILabel!
@@ -44,12 +46,27 @@ final class ViewController: UIViewController {
   // Handles all data preprocessing and makes calls to run inference.
   private var poseEstimator: PoseEstimator?
   private var cameraFeedManager: CameraFeedManager!
+    
+  var timerSeconds = 120
+  var timmerRunning = true
 
   // Serial queue to control all tasks related to the TFLite model.
   let queue = DispatchQueue(label: "serial_queue")
 
   // Flag to make sure there's only one frame processed at each moment.
   var isRunning = false
+  var isTimerRunning = false
+
+    
+@objc func updateTimer() {
+    print("Updating")
+    timerSeconds -= 1     //This will decrement(count down)the seconds.
+}
+
+//func runTimer() {
+//    timer = Timer.scheduledTimer(timeInterval: <#T##TimeInterval#>, target: <#T##Any#>, selector: <#T##Selector#>, userInfo: <#T##Any?#>, repeats: <#T##Bool#>)
+//    print("Running timer")
+//}
 
   // MARK: View Handling Methods
   override func viewDidLoad() {
@@ -171,6 +188,7 @@ final class ViewController: UIViewController {
 }
 
 // MARK: - CameraFeedManagerDelegate Methods
+@available(iOS 13.0, *)
 extension ViewController: CameraFeedManagerDelegate {
   func cameraFeedManager(
     _ cameraFeedManager: CameraFeedManager, didOutput pixelBuffer: CVPixelBuffer
@@ -182,6 +200,7 @@ extension ViewController: CameraFeedManagerDelegate {
   private func runModel(_ pixelBuffer: CVPixelBuffer) {
     // Guard to make sure that there's only 1 frame process at each moment.
     guard !isRunning else { return }
+    //    print("Running Model")
 
     // Guard to make sure that the pose estimator is already initialized.
     guard let estimator = poseEstimator else { return }
@@ -201,6 +220,8 @@ extension ViewController: CameraFeedManagerDelegate {
           self.totalTimeLabel.text = String(format: "%.2fms",
                                             times.total * 1000)
           self.scoreLabel.text = String(format: "%.3f", result.score)
+            
+//          self.timerLabel.text = String(format: "%.3f", )
 
           // Allowed to set image and overlay
           let image = UIImage(ciImage: CIImage(cvPixelBuffer: pixelBuffer))
@@ -211,7 +232,8 @@ extension ViewController: CameraFeedManagerDelegate {
             return
           }
         
-          var goodForm = self.overlayView.drawForm(at: image, person: result)
+          let angle = self.overlayView.drawForm(at: image, person: result)
+          self.timerLabel.text = String(angle)
         }
       } catch {
         os_log("Error running pose estimation.", type: .error)
@@ -228,5 +250,5 @@ enum Constants {
   static let defaultModelType: ModelType = .movenetLighting
 
   // Minimum score to render the result.
-  static let minimumScore: Float32 = 0.4
+  static let minimumScore: Float32 = 0.2
 }
