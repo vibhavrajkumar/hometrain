@@ -60,13 +60,56 @@ class OverlayView: UIImageView {
     guard let strokes = strokes(from: person) else { return }
     image.draw(at: .zero)
     context.setLineWidth(Config.dot.radius)
+      
     drawDots(at: context, dots: strokes.dots)
     drawLines(at: context, lines: strokes.lines)
     context.setStrokeColor(UIColor.blue.cgColor)
+      
     context.strokePath()
     guard let newImage = UIGraphicsGetImageFromCurrentImageContext() else { fatalError() }
     self.image = newImage
   }
+    
+func drawForm(at image: UIImage, person: Person) -> Bool{
+  if context == nil {
+    UIGraphicsBeginImageContext(image.size)
+    guard let context = UIGraphicsGetCurrentContext() else {
+      fatalError("set current context faild")
+    }
+    self.context = context
+  }
+  guard let strokes = strokes(from: person) else { return false}
+  image.draw(at: .zero)
+  context.setLineWidth(Config.dot.radius)
+    
+  let lShoulderPoint = strokes.dots[5];
+  let lHipPoint = strokes.dots[11];
+  let lAnklePoint = strokes.dots[15];
+  let v1_x = lShoulderPoint.x - lHipPoint.x;
+  let v1_y = lShoulderPoint.y - lHipPoint.y;
+  let v2_x = lHipPoint.x - lAnklePoint.x;
+  let v2_y = lHipPoint.y - lAnklePoint.y;
+  let dotProd = (v1_x*v2_x) + (v1_y*v2_y);
+  let mags = sqrt(pow(v1_x,2) + pow(v1_y,2)) * sqrt(pow(v2_x,2) + pow(v2_y,2));
+  let angle = acos(dotProd/mags)*180/Double.pi;
+  print(angle);
+  let straightBack = angle < 15;
+    
+  context.move(to: CGPoint(x: lShoulderPoint.x, y: lShoulderPoint.y));
+  context.addLine(to: CGPoint(x: lHipPoint.x, y: lHipPoint.y));
+    
+  context.move(to: CGPoint(x: lHipPoint.x, y: lHipPoint.y));
+  context.addLine(to: CGPoint(x: lAnklePoint.x, y: lAnklePoint.y));
+  context.setStrokeColor(UIColor.red.cgColor)
+  if(straightBack) {
+    context.setStrokeColor(UIColor.green.cgColor)
+  }
+    
+  context.strokePath()
+  guard let newImage = UIGraphicsGetImageFromCurrentImageContext() else { fatalError() }
+  self.image = newImage
+  return straightBack;
+}
 
   /// Draw the dots (i.e. keypoints).
   ///
@@ -90,7 +133,7 @@ class OverlayView: UIImageView {
   /// - Parameters:
   ///     - context: The context to be drawn on.
   ///     - lines: The list of lines to be drawn.
-  private func drawLines(at context: CGContext, lines: [Line]) {
+    private func drawLines(at context: CGContext, lines: [Line]) {
     for line in lines {
       context.move(to: CGPoint(x: line.from.x, y: line.from.y))
       context.addLine(to: CGPoint(x: line.to.x, y: line.to.y))

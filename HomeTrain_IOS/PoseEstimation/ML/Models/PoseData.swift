@@ -27,23 +27,23 @@ struct Times {
 
 /// An enum describing a body part (e.g. nose, left eye etc.).
 enum BodyPart: String, CaseIterable {
-  case nose = "nose"
-  case leftEye = "left eye"
-  case rightEye = "right eye"
-  case leftEar = "left ear"
-  case rightEar = "right ear"
-  case leftShoulder = "left shoulder"
-  case rightShoulder = "right shoulder"
-  case leftElbow = "left elbow"
-  case rightElbow = "right elbow"
-  case leftWrist = "left wrist"
-  case rightWrist = "right wrist"
-  case leftHip = "left hip"
-  case rightHip = "right hip"
-  case leftKnee = "left knee"
-  case rightKnee = "right knee"
-  case leftAnkle = "left ankle"
-  case rightAnkle = "right ankle"
+  case nose = "nose" //0
+  case leftEye = "left eye" //1
+  case rightEye = "right eye" //2
+  case leftEar = "left ear" //3
+  case rightEar = "right ear" //4
+  case leftShoulder = "left shoulder" //5
+  case rightShoulder = "right shoulder" //6
+  case leftElbow = "left elbow" //7
+  case rightElbow = "right elbow" //8
+  case leftWrist = "left wrist" //9
+  case rightWrist = "right wrist" //10
+  case leftHip = "left hip" //11
+  case rightHip = "right hip" //12
+  case leftKnee = "left knee" //13
+  case rightKnee = "right knee" //14
+  case leftAnkle = "left ankle" //15
+  case rightAnkle = "right ankle" //16
 
   /// Get the index of the body part in the array returned by pose estimation models.
   var position: Int {

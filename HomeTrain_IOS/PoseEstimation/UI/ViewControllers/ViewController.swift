@@ -210,9 +210,8 @@ extension ViewController: CameraFeedManagerDelegate {
             self.overlayView.image = image
             return
           }
-
-          // Visualize the pose estimation result.
-          self.overlayView.draw(at: image, person: result)
+        
+          var goodForm = self.overlayView.drawForm(at: image, person: result)
         }
       } catch {
         os_log("Error running pose estimation.", type: .error)
@@ -225,9 +224,9 @@ extension ViewController: CameraFeedManagerDelegate {
 enum Constants {
   // Configs for the TFLite interpreter.
   static let defaultThreadCount = 4
-  static let defaultDelegate: Delegates = .gpu
-  static let defaultModelType: ModelType = .movenetThunder
+  static let defaultDelegate: Delegates = .cpu
+  static let defaultModelType: ModelType = .movenetLighting
 
   // Minimum score to render the result.
-  static let minimumScore: Float32 = 0.2
+  static let minimumScore: Float32 = 0.4
 }
