@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:home_train/constants.dart' as constants;
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:home_train/components/confetti_widgets.dart';
 
 class SigninBuilder extends StatefulWidget {
   //new widget for signin page
@@ -96,34 +97,7 @@ class _SignIn extends State<SigninBuilder> {
                     ))),
           ),
           //create box with "sign up and correct colors"
-          TextButton(
-              //when button is pressed, send to sign up page
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const SignUpBuilder()),
-                );
-              },
-              child: Container(
-                  height: 50,
-                  width: 250,
-                  color: Colors.transparent,
-                  child: Container(
-                      decoration: const BoxDecoration(
-                          color: Color.fromRGBO(0, 66, 96, 1.0),
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(20.0))),
-                      child: const Center(
-                        child: Text(
-                          "Sign Up",
-                          style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.white,
-                              fontFamily: 'Montserrat'),
-                          textAlign: TextAlign.center,
-                        ),
-                      )))),
+          const Conf(),
         ]
             .map(
               (child) => Padding(
