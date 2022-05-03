@@ -35,8 +35,6 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Home Train',
       theme: ThemeData(primarySwatch: Colors.blue),
-      //home: const BottomNavbar(),
-      // home: const LoginPage(),
       home: const MyHomePage(),
     );
   }

@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:home_train/components/generic_banner.dart';
 import 'package:home_train/constants.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:math';
+import 'package:collection/collection.dart';
 
 /*
   Screen for displaying the user's stats.
@@ -22,9 +26,37 @@ class StatsScreen extends StatefulWidget {
   Current "Dummy State" for pulling up a stats page
 */
 class _StatsScreen extends State<StatsScreen> {
+  var rng = Random();
+
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final User? user = FirebaseAuth.instance.currentUser;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  List<FlSpot> generatePoints() {
+    var docRef = _firestore.collection("users").doc(user!.uid);
+    List<FlSpot> spots = [];
+
+    docRef.get().then((snapshot) {
+      List data = snapshot[widget.workout];
+
+      for (int i = 0; i < data.length; ++i) {
+        spots.add(FlSpot(i + 1, data[i]));
+      }
+    });
+
+    return spots;
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+    List<FlSpot> spots = generatePoints();
+    num maxY = 6;
+
+    for (int i = 0; i < spots.length; i++) {
+      maxY = spots[i].y > maxY ? spots[i].y : maxY;
+    }
+
     String topText = widget.workout + " Analytics";
     List<Color> gradientColors = [
       homeTrainBlue,
@@ -39,7 +71,13 @@ class _StatsScreen extends State<StatsScreen> {
           SizedBox(
             height: 20,
             width: 20,
-            child: IconButton(onPressed: () {Navigator.pop(context);} , icon: const Icon(Icons.arrow_back), color: Colors.white), )
+            child: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const Icon(Icons.arrow_back),
+                color: Colors.white),
+          )
         ],
       ),
       const SizedBox(
@@ -60,34 +98,15 @@ class _StatsScreen extends State<StatsScreen> {
                     blurRadius: 3)
               ]),
           child: Padding(
-            padding: const EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(20.0),
             child: Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 10.0),
-                  child: Column(
-                      //crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        // Text("Activity", style: TextStyle(
-                        //   fontWeight: FontWeight.w500,
-                        //   fontSize: 13,
-                        //   color: Colors.black.withOpacity(0.5)
-                        // )),
-                        // SizedBox(height: 10,
-                        // ),
-                        Text("Average " + widget.workout + "/day: 13",
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
-                            )),
-                        const SizedBox(height: 10)
-                      ]),
-                ),
                 Container(
                   width: size.width - 20,
-                  height: 150,
+                  height: 200,
                   child: LineChart(
                       /////////////////***********CITATION: https://www.codeplayon.com/2021/10/how-to-make-line-charts-in-flutter/*****************///////////////// */
+
                       LineChartData(
                     gridData: FlGridData(
                       show: true,
@@ -107,50 +126,26 @@ class _StatsScreen extends State<StatsScreen> {
                         );
                       },
                     ),
-                    // titlesData: FlTitlesData(
-                    //   show: true,
-                    //   rightTitles: AxisTitles(
-                    //     sideTitles: SideTitles(showTitles: false),
-                    //   ),
-                    //   topTitles: AxisTitles(
-                    //     sideTitles: SideTitles(showTitles: false),
-                    //   ),
-                    //   bottomTitles: AxisTitles(
-                    //     sideTitles: SideTitles(
-                    //       showTitles: true,
-                    //       reservedSize: 30,
-                    //       interval: 1,
-                    //       getTitlesWidget: bottomTitleWidgets,
-                    //     ),
-                    //   ),
-                    //   leftTitles: AxisTitles(
-                    //     sideTitles: SideTitles(
-                    //       showTitles: true,
-                    //       interval: 1,
-                    //       getTitlesWidget: leftTitleWidgets,
-                    //       reservedSize: 42,
-                    //     ),
-                    //   ),
-                    // ),
+                    axisTitleData: FlAxisTitleData(
+                      show: true,
+                      rightTitle: AxisTitle(showTitle: false),
+                      topTitle: AxisTitle(showTitle: false),
+                      bottomTitle: AxisTitle(
+                          showTitle: true, titleText: "Workout Number"),
+                      leftTitle:
+                          AxisTitle(showTitle: true, titleText: widget.workout),
+                    ),
                     borderData: FlBorderData(
                         show: true,
                         border: Border.all(
                             color: const Color(0xff37434d), width: 1)),
-                    minX: 0,
-                    maxX: 11,
+                    minX: 1,
+                    maxX: max(spots.length.toDouble(), 15),
                     minY: 0,
-                    maxY: 6,
+                    maxY: maxY.toDouble(),
                     lineBarsData: [
                       LineChartBarData(
-                        spots: [
-                          FlSpot(0, 3),
-                          FlSpot(2.6, 2),
-                          FlSpot(4.9, 5),
-                          FlSpot(6.8, 3.1),
-                          FlSpot(8, 4),
-                          FlSpot(9.5, 3),
-                          FlSpot(11, 4),
-                        ],
+                        spots: spots,
                         isCurved: true,
                         colors: gradientColors,
                         barWidth: 5,
@@ -171,65 +166,59 @@ class _StatsScreen extends State<StatsScreen> {
           ),
         ),
       ),
-      SizedBox(height: 20),
-      Wrap(
-        spacing: 20,
-        children: [
-          Container(
-              width: (size.width - 60) / 2,
-              height: 170,
-              decoration: BoxDecoration(
-                  color: homeTrainBlue,
-                  borderRadius: BorderRadius.circular(12),
-                  boxShadow: [
-                    BoxShadow(
-                        color: Colors.grey.withOpacity(0.01),
-                        spreadRadius: 10,
-                        blurRadius: 3)
-                  ]),
-              child: Padding(
-                  padding: const EdgeInsets.only(
-                      left: 25, right: 25, top: 20, bottom: 20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                          width: 40,
-                          height: 40,
-                          decoration: BoxDecoration(
-                              color: homeTrainGreen, shape: BoxShape.circle),
-                          child: Icon(Icons.arrow_back, color: Colors.white))
-                    ],
-                  ))),
-          Container(
-              width: (size.width - 60) / 2,
-              height: 170,
-              decoration: BoxDecoration(
-                  color: homeTrainGreen,
-                  borderRadius: BorderRadius.circular(12),
-                  boxShadow: [
-                    BoxShadow(
-                        color: Colors.grey.withOpacity(0.01),
-                        spreadRadius: 10,
-                        blurRadius: 3)
-                  ]),
-              child: Padding(
-                  padding: const EdgeInsets.only(
-                      left: 25, right: 25, top: 20, bottom: 20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                          width: 40,
-                          height: 40,
-                          decoration: const BoxDecoration(
-                              color: homeTrainBlue, shape: BoxShape.circle),
-                          child: const Icon(Icons.arrow_forward,
-                              color: Colors.white))
-                    ],
-                  ))),
-        ],
-      )
+      // SizedBox(height: 20),
+      // Wrap(
+      //   spacing: 20,
+      //   children: [
+      //     Padding(
+      //         padding: const EdgeInsets.only(
+      //             left: 25, right: 25, top: 20, bottom: 20),
+      //         child: Column(
+      //           crossAxisAlignment: CrossAxisAlignment.start,
+      //           children: [
+      //             GestureDetector(
+      //                 onTap: () {
+      //                   counter--;
+      //                   if (counter < 0) {
+      //                     counter = 0;
+      //                   }
+      //                 },
+      //                 child: Container(
+      //                     width: 40,
+      //                     height: 40,
+      //                     decoration: BoxDecoration(
+      //                         color: homeTrainGreen, shape: BoxShape.circle),
+      //                     child: Icon(Icons.arrow_back, color: Colors.white)))
+      //           ],
+      //         )),
+      //     Padding(
+      //         padding: const EdgeInsets.only(
+      //             left: 25, right: 25, top: 20, bottom: 20),
+      //         child: Column(
+      //           crossAxisAlignment: CrossAxisAlignment.start,
+      //           children: [
+      //             GestureDetector(
+      //                 onTap: () {
+      //                   counter++;
+      //                   if (counter > 11) {
+      //                     counter = 11;
+      //                   }
+      //                 },
+      //                 child: Container(
+      //                     width: 40,
+      //                     height: 40,
+      //                     decoration: BoxDecoration(
+      //                         color: homeTrainBlue, shape: BoxShape.circle),
+      //                     child:
+      //                         Icon(Icons.arrow_forward, color: Colors.white)))
+      //           ],
+      //         ))
+      //   ],
+      // ),
+      // SizedBox(height: 20),
+      // Text(spots[counter].y.toString(),
+      //     textAlign: TextAlign.center,
+      //     style: TextStyle(color: Colors.black, fontSize: 30))
     ]));
   }
 }
