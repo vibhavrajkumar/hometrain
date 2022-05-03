@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:home_train/components/generic_banner.dart';
+import 'package:home_train/components/signin_widgets.dart';
 import 'package:home_train/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -67,8 +68,11 @@ class _ProfileScreen extends State<ProfileScreen> {
                   signout(); 
                   final googleSignIn = GoogleSignIn(); 
                   googleSignIn.disconnect(); 
-                  Navigator.pop(context);
-                  Navigator.pop(context); 
+                  Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const SigninBuilder()),
+                );
+                  //Navigator.pop(context); 
                 }, 
                 
                 style:  ButtonStyle(

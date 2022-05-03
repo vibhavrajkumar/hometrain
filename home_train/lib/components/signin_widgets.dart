@@ -52,106 +52,94 @@ class _SignIn extends State<SigninBuilder> {
 
   bool value = false;
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {   //get dimensions to set sizes relative to size of screen
+    double width = MediaQuery.of(context).size.width;
+    double height =
+        MediaQuery.of(context).size.height; //safearea (valid button locations)
+    var padding = MediaQuery.of(context).padding;
+    double total_height = height -
+        padding.top -
+        padding.bottom; //total height (including unsafe area)
     return Scaffold(
-        //create an app bar (bar on the top portion of the screen)
-        appBar: AppBar(
-          shape: const ContinuousRectangleBorder(
-              //give the bar rounded edges on the bottom to make it cleaner
-              borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(20.0),
-                  bottomRight: Radius.circular(20.0))),
-          backgroundColor: const Color.fromRGBO(0, 93, 92, 1.0),
-          leading: Builder(
-            builder: (BuildContext context) {
-              //create back button, when pressed will return to previous screen
-              return IconButton(
-                icon: const Icon(Icons.arrow_back),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              );
-            },
+        //create widgets in a uniform line
+        body: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+          Stack(
+            children: <Widget>[
+              Align(
+                alignment: const FractionalOffset(0.2, 0.3),
+                child: Image.asset(
+                  "images/HomeTrainLogo.png",
+                  width: width * 0.8,
+                ), //logo upload
+              ),
+              //create button for login page
+              Positioned(
+              bottom: 150, 
+              right: 25,
+              child: TextButton(
+                //todo (link with firebase when "login" pressed)
+                onPressed: () => signup(context),
+                child: Container(
+                    //create login button with correct colors and rounded edges
+                    height: 50,
+                    width: 100,
+                    color: Colors.transparent,
+                    child: Container(
+                        decoration: const BoxDecoration(
+                            color: Color.fromRGBO(0, 93, 92, 1.0),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20.0))),
+                        child: const Center(
+                          child: Text(
+                            "Log In",
+                            style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.white,
+                                fontFamily: 'Montserrat'),
+                            textAlign: TextAlign.center,
+                          ),
+                        ))),
+              ),
+              ),
+              //create box with "sign up and correct colors"
+              Positioned(
+                  bottom: 50,
+                  right: 25,
+                  child: TextButton(
+                      //when button is pressed, send to sign up page
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SignUpBuilder()),
+                        );
+                      },
+                      child: Container(
+                          height: 50,
+                          width: 250,
+                          color: Colors.transparent,
+                          child: Container(
+                              decoration: const BoxDecoration(
+                                  color: Color.fromRGBO(0, 66, 96, 1.0),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20.0))),
+                              child: const Center(
+                                child: Text(
+                                  "Sign Up",
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      color: Colors.white,
+                                      fontFamily: 'Montserrat'),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ))))),
+            ],
           ),
-          title: const Text('Sign In',
-              style: TextStyle(color: Colors.white, fontFamily: 'Montserrat')),
-        ),
-        body: Column(
-          //create text fields and login button
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            //   //textfield for username
-            //   Padding(
-            //     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-            //     child: TextFormField(
-            //       decoration: const InputDecoration(
-            //         border: UnderlineInputBorder(),
-            //         labelText: 'Enter your username',
-            //       ),
-            //     ),
-            //   ),
-            //   Padding(
-            //     //textfield for password
-            //     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-            //     child: TextFormField(
-            //       obscureText: true,
-            //       decoration: const InputDecoration(
-            //         border: UnderlineInputBorder(),
-            //         labelText: 'Enter your password',
-            //       ),
-            //     ),
-            //   ),
-            //   Padding(
-            //     //create "Remember Me" checkbox
-            //     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-            //     child: Row(children: <Widget>[
-            //       // create in a uniform row
-            //       //text for checkbox
-            //       const Text(
-            //         'Remember Me',
-            //         style: TextStyle(
-            //             color: Color.fromRGBO(0, 93, 92, 1.0),
-            //             fontSize: 15,
-            //             fontFamily: 'Montserrat'),
-            //       ),
-            //       //textbox with theme fill color
-            //       Checkbox(
-            //           value: this.value,
-            //           onChanged: (bool? value) {
-            //             setState(() {
-            //               this.value = value!;
-            //             });
-            //           },
-            //           checkColor: Colors.white,
-            //           activeColor: const Color.fromRGBO(0, 93, 92, 1.0))
-            //     ]),
-            //   ),
-            TextButton(
-              //todo (link with firebase when "login" pressed)
-              onPressed: () => signup(context),
-              child: Container(
-                  //create login button with correct colors and rounded edges
-                  height: 50,
-                  width: 100,
-                  color: Colors.transparent,
-                  child: Container(
-                      decoration: const BoxDecoration(
-                          color: Color.fromRGBO(0, 93, 92, 1.0),
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(20.0))),
-                      child: const Center(
-                        child: Text(
-                          "Log In",
-                          style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.white,
-                              fontFamily: 'Montserrat'),
-                          textAlign: TextAlign.center,
-                        ),
-                      ))),
-            ),
-          ],
-        ));
+        ]));
+         
   }
 }
 
@@ -252,3 +240,79 @@ class _SignUp extends State<SignUpBuilder> {
         ));
   }
 }
+
+
+
+// Scaffold(
+//         //create an app bar (bar on the top portion of the screen)
+//         appBar: AppBar(
+//           shape: const ContinuousRectangleBorder(
+//               //give the bar rounded edges on the bottom to make it cleaner
+//               borderRadius: BorderRadius.only(
+//                   bottomLeft: Radius.circular(20.0),
+//                   bottomRight: Radius.circular(20.0))),
+//           backgroundColor: const Color.fromRGBO(0, 93, 92, 1.0),
+//           leading: Builder(
+//             builder: (BuildContext context) {
+//               //create back button, when pressed will return to previous screen
+//               return IconButton(
+//                 icon: const Icon(Icons.arrow_back),
+//                 onPressed: () {
+//                   Navigator.pop(context);
+//                 },
+//               );
+//             },
+//           ),
+//           title: const Text('Sign In',
+//               style: TextStyle(color: Colors.white, fontFamily: 'Montserrat')),
+//         ),
+//         body: Column(
+//           //create text fields and login button
+//           crossAxisAlignment: CrossAxisAlignment.start,
+//           children: <Widget>[
+//             //   //textfield for username
+//             //   Padding(
+//             //     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+//             //     child: TextFormField(
+//             //       decoration: const InputDecoration(
+//             //         border: UnderlineInputBorder(),
+//             //         labelText: 'Enter your username',
+//             //       ),
+//             //     ),
+//             //   ),
+//             //   Padding(
+//             //     //textfield for password
+//             //     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+//             //     child: TextFormField(
+//             //       obscureText: true,
+//             //       decoration: const InputDecoration(
+//             //         border: UnderlineInputBorder(),
+//             //         labelText: 'Enter your password',
+//             //       ),
+//             //     ),
+//             //   ),
+//             //   Padding(
+//             //     //create "Remember Me" checkbox
+//             //     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+//             //     child: Row(children: <Widget>[
+//             //       // create in a uniform row
+//             //       //text for checkbox
+//             //       const Text(
+//             //         'Remember Me',
+//             //         style: TextStyle(
+//             //             color: Color.fromRGBO(0, 93, 92, 1.0),
+//             //             fontSize: 15,
+//             //             fontFamily: 'Montserrat'),
+//             //       ),
+//             //       //textbox with theme fill color
+//             //       Checkbox(
+//             //           value: this.value,
+//             //           onChanged: (bool? value) {
+//             //             setState(() {
+//             //               this.value = value!;
+//             //             });
+//             //           },
+//             //           checkColor: Colors.white,
+//             //           activeColor: const Color.fromRGBO(0, 93, 92, 1.0))
+//             //     ]),
+//             //   ),
