@@ -36,16 +36,17 @@ class _LoginPage extends State<LoginPage> {
       if (result != null) {
         // var firebaseUser = FirebaseAuth.instance.currentUser;
         FirebaseFirestore.instance
-            .collection("users").
-            doc().
-            set({"user": user!.email, "uid": user.uid}).then((value) => Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-                builder: (context) => const BottomNavbar()))); 
+            .collection("users")
+            .doc()
+            .set({"user": user!.email, "uid": user.uid}).then((value) =>
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const BottomNavbar())));
       } // if result not null we simply call the MaterialpageRoute,
       // for go to the HomePage screen
       Navigator.pushReplacement(context,
-      MaterialPageRoute(builder: (context) => const BottomNavbar()));
+          MaterialPageRoute(builder: (context) => const BottomNavbar()));
     }
   }
 

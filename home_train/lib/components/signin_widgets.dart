@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:home_train/components/navbar.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:home_train/constants.dart' as constants;
 
 class SigninBuilder extends StatefulWidget {
   //new widget for signin page
@@ -32,12 +33,19 @@ class _SignIn extends State<SigninBuilder> {
       UserCredential result = await auth.signInWithCredential(authCredential);
       User? user = result.user;
 
-      if (result != null) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => BottomNavbar()),
-        );
-      } // if result not null we simply call the MaterialpageRoute,
+      var firebaseUser = FirebaseAuth.instance.currentUser;
+      DocumentReference<Map<String, dynamic>> docRef =
+          FirebaseFirestore.instance.collection("users").doc(firebaseUser!.uid);
+
+      DocumentSnapshot document = await docRef.get();
+
+      if (!document.exists) {
+        docRef
+            .set({for (String workout in constants.workouts) workout: <num>[]});
+      }
+
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (context) => const BottomNavbar()));
       // for go to the HomePage screen
     }
   }

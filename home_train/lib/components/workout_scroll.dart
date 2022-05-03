@@ -71,13 +71,8 @@ class _WorkoutScroll extends State<WorkoutScroll> {
       height: 200,
       child: ListView(
           scrollDirection: Axis.horizontal,
-          children: getWorkoutBoxes([
-            "Push-Ups",
-            "Sit-Ups",
-            "Squats",
-            "Plank",
-          ], widget.tapEvent, widget.color == constants.homeTrainGreen,
-              context)),
+          children: getWorkoutBoxes(constants.workouts, widget.tapEvent,
+              widget.color == constants.homeTrainGreen, context)),
     );
   }
 }

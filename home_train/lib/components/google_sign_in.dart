@@ -33,8 +33,6 @@ class _LoginPage extends State<LoginPage> {
       UserCredential result = await auth.signInWithCredential(authCredential);
       User? user = result.user;
 
-      debugPrint("Test 1 Adarsh");
-
       if (result != null) {
         Navigator.push(
           context,
@@ -62,7 +60,6 @@ class _LoginPage extends State<LoginPage> {
             color: Theme.of(context).colorScheme.primary,
             width: 1,
           );
-          // return null; // Defer to the widget's default.
         },
       ),
     );
