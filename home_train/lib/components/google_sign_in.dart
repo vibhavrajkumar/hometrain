@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:home_train/constants.dart' as constants;
 import 'navbar.dart';
@@ -49,8 +47,8 @@ class _LoginPage extends State<LoginPage> {
   Widget build(BuildContext context) {
     final ButtonStyle outlineButtonStyle = OutlinedButton.styleFrom(
       primary: Colors.black87,
-      minimumSize: Size(88, 36),
-      padding: EdgeInsets.symmetric(horizontal: 16),
+      minimumSize: const Size(88, 36),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(2)),
       ),
@@ -72,7 +70,7 @@ class _LoginPage extends State<LoginPage> {
           child: OutlinedButton(
         style: outlineButtonStyle,
         onPressed: () => signup(context),
-        child: Text('Sign in with Google'),
+        child: const Text('Sign in with Google'),
       )),
     );
   }
