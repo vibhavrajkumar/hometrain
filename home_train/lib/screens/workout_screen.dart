@@ -11,6 +11,9 @@ class WorkoutScreen extends StatefulWidget {
   _WorkoutScreen createState() => _WorkoutScreen();
 }
 
+/*
+  WorkoutScreen is built off of two widgets: GenericBanner, and a WorkoutScroll
+*/
 class _WorkoutScreen extends State<WorkoutScreen> {
   @override
   Widget build(BuildContext context) {

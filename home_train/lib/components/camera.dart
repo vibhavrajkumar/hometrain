@@ -5,6 +5,8 @@ import '../main.dart';
 
 //Class to show real time camera view
 class CameraScreen extends StatefulWidget {
+  const CameraScreen({Key? key}) : super(key: key);
+
   @override
   _CameraScreenState createState() => _CameraScreenState();
 }
@@ -17,7 +19,6 @@ class _CameraScreenState extends State<CameraScreen>
 
   @override
   void initState() {
-    // SystemChrome.setEnabledSystemUIOverlays([]);
     if (cameras.isNotEmpty) {
       onNewCameraSelected(cameras[0]);
     }

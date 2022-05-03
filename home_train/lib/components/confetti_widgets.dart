@@ -9,6 +9,7 @@ class Conf extends StatefulWidget {
 }
 
 class _Conf extends State<Conf> {
+  // Determines animation length
   ConfettiController controller =
       ConfettiController(duration: const Duration(seconds: 5));
 
@@ -19,7 +20,7 @@ class _Conf extends State<Conf> {
         colors: const [homeTrainBlue, homeTrainGreen],
         blastDirection: 0,
         child: TextButton(
-            //when button is pressed, send to sign up page
+            // Plays confetti animation on press
             onPressed: () {
               controller.play();
             },

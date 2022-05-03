@@ -4,6 +4,9 @@ import 'package:home_train/constants.dart' as constants;
 /*
   Takes in a list of labels to dynamically create a list of scrollable boxes
   Calls [colorTransition] to create a gradient.
+
+  Uses tapEvent function to call something based on the label 
+  (see stats screen + home page)
 */
 List<Widget> getWorkoutBoxes(List<String> labels, Function tapEvent,
     bool reverse, BuildContext context) {
@@ -49,7 +52,6 @@ Widget getWorkoutBox(
 
 /*
   Creates Widget for Workout Scroll
-  Might make stateless later if it doesn't need to be dynamically updated
 */
 class WorkoutScroll extends StatefulWidget {
   final Color color;

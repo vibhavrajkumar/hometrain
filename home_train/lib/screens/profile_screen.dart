@@ -18,21 +18,22 @@ class ProfileScreen extends StatefulWidget {
 }
 
 /*
-  Current "Dummy State" for pulling up a Profile page
+  Pulls up the profile page
+   - Calls Firebase to Fetch User Info
+   - Allows for Complete Sign Out from both Firebase + Google Auth
 */
 class _ProfileScreen extends State<ProfileScreen> {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   get child => null;
-  getProfileImage() {
-    Widget i;
-    try {
-      i = Image.network(_firebaseAuth.currentUser!.photoURL!,
-          height: 50, width: 50);
-    } catch (e) {
-      i = const Icon(Icons.account_circle, size: 50);
-    }
-    return i;
+  getProfileImage(BuildContext context) {
+    /*
+      Dummy Image if the server can't connect
+    */
+    return Image.network(_firebaseAuth.currentUser!.photoURL!,
+        height: 50, width: 50, errorBuilder: (context, error, stackTrace) {
+      return const Icon(Icons.account_circle, size: 50);
+    });
   }
 
   Future<void> signout() async {
@@ -47,15 +48,15 @@ class _ProfileScreen extends State<ProfileScreen> {
         body: Column(children: [
       GenericBanner(
         homeTrainGreen,
-        text: "Let's Profile, \n" +
-            _firebaseAuth.currentUser!.displayName! +
-            " !",
+        text:
+            "Let's Profile, \n" + _firebaseAuth.currentUser!.displayName! + "!",
       ),
 
       Padding(
         padding: const EdgeInsets.all(15.0),
         child: ClipRRect(
-            borderRadius: BorderRadius.circular(20), child: getProfileImage()),
+            borderRadius: BorderRadius.circular(20),
+            child: getProfileImage(context)),
       ),
 
       Padding(
@@ -73,7 +74,6 @@ class _ProfileScreen extends State<ProfileScreen> {
                       MaterialPageRoute(
                           builder: (context) => const SigninBuilder()),
                     );
-                    //Navigator.pop(context);
                   },
                   style: ButtonStyle(
                     backgroundColor:
@@ -90,7 +90,5 @@ class _ProfileScreen extends State<ProfileScreen> {
                   ))))
       //TextButton(onPressed: () {Navigator.pop(context);}, child: Container()),
     ]));
-
-    //TODO: Add Profile Display/Info
   }
 }

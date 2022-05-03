@@ -9,7 +9,7 @@ import 'package:collection/collection.dart';
 
 /*
   Screen for displaying the user's stats.
-  As more detection is added, statistics will be pulled from Firebase and
+  Statistics are pulled from firebase
 
   @params:
   String workout: name of the workout and subsequent API call
@@ -23,7 +23,7 @@ class StatsScreen extends StatefulWidget {
 }
 
 /*
-  Current "Dummy State" for pulling up a stats page
+  State for stats page. Dynamically loads based on the label of the button pressed
 */
 class _StatsScreen extends State<StatsScreen> {
   var rng = Random();
@@ -108,7 +108,7 @@ class _StatsScreen extends State<StatsScreen> {
             padding: const EdgeInsets.all(20.0),
             child: Column(
               children: [
-                Container(
+                SizedBox(
                   width: size.width - 20,
                   height: 200,
                   child: LineChart(

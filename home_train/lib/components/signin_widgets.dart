@@ -19,6 +19,9 @@ class _SignIn extends State<SigninBuilder> {
   //actual build of the signin page
   final FirebaseAuth auth = FirebaseAuth.instance;
 
+  /*
+    Uses Google OAuth to signin and authenticate, initializes firebase for first-time users
+  */
   Future<void> signup(BuildContext context) async {
     //debugPrint("Test 1 Adarsh");
     final GoogleSignIn googleSignIn = GoogleSignIn();
@@ -41,6 +44,7 @@ class _SignIn extends State<SigninBuilder> {
 
       DocumentSnapshot document = await docRef.get();
 
+      // Creates array of points for all workouts on first-time
       if (!document.exists) {
         docRef
             .set({for (String workout in constants.workouts) workout: <num>[]});
@@ -52,17 +56,17 @@ class _SignIn extends State<SigninBuilder> {
     }
   }
 
-  bool value = false;
   @override
+  /*
+    Creates a column of 3 evenly space objects:
+      - The Logo
+      - Sign In Button
+      - Confetti Button
+  */
   Widget build(BuildContext context) {
     //get dimensions to set sizes relative to size of screen
-    double width = MediaQuery.of(context).size.width;
     double height =
         MediaQuery.of(context).size.height; //safearea (valid button locations)
-    var padding = MediaQuery.of(context).padding;
-    double total_height = height -
-        padding.top -
-        padding.bottom; //total height (including unsafe area)
     return Scaffold(
         //create widgets in a uniform line
         body: Center(
@@ -71,7 +75,7 @@ class _SignIn extends State<SigninBuilder> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           SvgPicture.asset("images/HomeTrainLogo.svg",
-              height: 100, width: 100, fit: BoxFit.scaleDown), //logo
+              height: 100, width: 100, fit: BoxFit.scaleDown),
           //create button for login page
           TextButton(
             //todo (link with firebase when "login" pressed)
@@ -110,102 +114,3 @@ class _SignIn extends State<SigninBuilder> {
     ));
   }
 }
-
-class SignUpBuilder extends StatefulWidget {
-  //widget for the signup page
-  const SignUpBuilder({Key? key}) : super(key: key);
-
-  @override
-  State<StatefulWidget> createState() => _SignUp();
-}
-
-class _SignUp extends State<SignUpBuilder> {
-  //build of the signup page
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        //create top bar of the signup page with rounded bottom borders
-        appBar: AppBar(
-          shape: const ContinuousRectangleBorder(
-              borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(20.0),
-                  bottomRight: Radius.circular(20.0))),
-          backgroundColor: const Color.fromRGBO(0, 93, 92, 1.0),
-          leading: Builder(
-            builder: (BuildContext context) {
-              //go back to previous screen when back button pressed
-              return IconButton(
-                icon: const Icon(Icons.arrow_back),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              );
-            },
-          ),
-          title: const Text('Sign Up',
-              style: TextStyle(color: Colors.white, fontFamily: 'Montserrat')),
-        ),
-        body: Column(
-          //create text fields and signup button align in a column
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            //create username creation textfield
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-              child: TextFormField(
-                decoration: const InputDecoration(
-                  border: UnderlineInputBorder(),
-                  labelText: 'Username',
-                ),
-              ),
-            ),
-            //create password creation textfield
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-              child: TextFormField(
-                obscureText: true,
-                decoration: const InputDecoration(
-                  border: UnderlineInputBorder(),
-                  labelText: 'Password',
-                ),
-              ),
-            ),
-            //create confirm password textfield
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-              child: TextFormField(
-                obscureText: true,
-                decoration: const InputDecoration(
-                  border: UnderlineInputBorder(),
-                  labelText: 'Confirm Password',
-                ),
-              ),
-            ),
-            //create signup button with rounded edges
-            TextButton(
-              onPressed: () {},
-              child: Container(
-                  height: 50,
-                  width: 100,
-                  color: Colors.transparent,
-                  child: Container(
-                      decoration: const BoxDecoration(
-                          color: Color.fromRGBO(0, 93, 92, 1.0),
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(20.0))),
-                      child: const Center(
-                        child: Text(
-                          "Sign Up",
-                          style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.white,
-                              fontFamily: 'Montserrat'),
-                          textAlign: TextAlign.center,
-                        ),
-                      ))),
-            ),
-          ],
-        ));
-  }
-}
-

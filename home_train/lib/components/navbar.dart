@@ -1,5 +1,3 @@
-import 'dart:async';
-import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:home_train/screens/home_screen.dart';
@@ -16,8 +14,6 @@ class BottomNavbar extends StatefulWidget {
 
 class _BottomNavbar extends State<BottomNavbar> {
   int _selectedIndex = 1;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
 
   /*
     This section creates 
@@ -53,7 +49,6 @@ class _BottomNavbar extends State<BottomNavbar> {
           BottomNavigationBarItem(
             icon: SvgPicture.asset("images/HomeTrainLogo.svg",
                 height: 20, width: 20, fit: BoxFit.scaleDown),
-            // icon: Icon(Icons.home_outlined),
             label: 'Home',
           ),
           const BottomNavigationBarItem(

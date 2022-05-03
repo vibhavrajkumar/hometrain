@@ -16,7 +16,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreen extends State<HomeScreen> {
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final User? user = FirebaseAuth.instance.currentUser;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
@@ -24,12 +23,12 @@ class _HomeScreen extends State<HomeScreen> {
   Function to push camera display to the top of navigator.
   Passed in to build on HomeScreen
 
-  @param String _ => dummy argument to allow for name-passing capabilities
+  @param String label => Chooses which workout to track and create data for
 */
   void goToCamera(BuildContext context, String label) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => CameraScreen()),
+      MaterialPageRoute(builder: (context) => const CameraScreen()),
     );
 
     var docRef = _firestore.collection("users").doc(user!.uid);
