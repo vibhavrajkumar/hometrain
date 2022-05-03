@@ -57,15 +57,19 @@ class _GenericBanner extends State<GenericBanner> {
     return Center(
       child: Column(
         children: <Widget>[
-          Text(
+          FittedBox(
+            fit: BoxFit.cover,
+            child: Text(
             widget.text,
             style: const TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.w300,
               fontSize: 40,
-            ),
-            // textAlign: TextAlign.center,
+             ),
+            textAlign: TextAlign.center,
           ),
+          ),
+          
         ],
       ),
     );
