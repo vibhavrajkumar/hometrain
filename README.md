@@ -12,9 +12,9 @@ The app includes two main features: workout detection and workout tracking.
 ## Technical Architecture
 
 <img width="900" alt="Screen Shot 2022-05-03 at 1 04 14 PM" src="https://user-images.githubusercontent.com/31574086/166515006-52298843-6371-474e-9984-405eb6d2ea65.png">
-<img width="1038" alt="Screen Shot 2022-05-03 at 8 58 51 PM" src="https://user-images.githubusercontent.com/31574086/166613898-29b525c8-78c5-431c-b5c1-8d958725f297.png">
-<img width="1041" alt="Screen Shot 2022-05-03 at 8 59 01 PM" src="https://user-images.githubusercontent.com/31574086/166613905-01308961-4aed-4c5a-8841-4fb3b4725bfc.png">
-<img width="1040" alt="Screen Shot 2022-05-03 at 8 59 13 PM" src="https://user-images.githubusercontent.com/31574086/166613913-1eeaa202-50ac-49c8-a714-67c2843e3ad1.png">
+<img width="900" alt="Screen Shot 2022-05-03 at 8 58 51 PM" src="https://user-images.githubusercontent.com/31574086/166613898-29b525c8-78c5-431c-b5c1-8d958725f297.png">
+<img width="900" alt="Screen Shot 2022-05-03 at 8 59 01 PM" src="https://user-images.githubusercontent.com/31574086/166613905-01308961-4aed-4c5a-8841-4fb3b4725bfc.png">
+<img width="900" alt="Screen Shot 2022-05-03 at 8 59 13 PM" src="https://user-images.githubusercontent.com/31574086/166613913-1eeaa202-50ac-49c8-a714-67c2843e3ad1.png">
 
 
 ## Installation Instructions (Flutter) 
