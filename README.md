@@ -16,6 +16,19 @@ The app includes two main features: workout detection and workout tracking.
 <img width="900" alt="Screen Shot 2022-05-03 at 8 59 01 PM" src="https://user-images.githubusercontent.com/31574086/166613905-01308961-4aed-4c5a-8841-4fb3b4725bfc.png">
 <img width="900" alt="Screen Shot 2022-05-03 at 8 59 13 PM" src="https://user-images.githubusercontent.com/31574086/166613913-1eeaa202-50ac-49c8-a714-67c2843e3ad1.png">
 
+## How The Files Are Organized:
+* `HomeTrain_iOS` is the native iOS TFLite code. It is built off of the [PoseNet Example Code](https://github.com/tensorflow/examples/tree/master/lite/examples/pose_estimation/ios)
+        -  The model + set up is contained in `ML`
+        -  The UI and modifications are contained in `UI`
+        -  The main logical components are contained in `Views` & `ViewController`
+        -  Pods contains necessary dependencies 
+* `home_train` contains the dart code and UI
+        - `web`, `iOS`, and `android` contain platform-specific dependencies and code
+        - `pubspec.yaml` contains the necessary dependencies
+        - `lib` has the running code, with main, constants and other important dart code
+            - `screens` contains each screen view
+            - `components` contains widgets/functions/components that are important
+* Things that aren't mentioned are boilerplate/dependency documents or assets
 
 ## Installation Instructions (Flutter) 
 
@@ -26,7 +39,8 @@ The app includes two main features: workout detection and workout tracking.
     - Web: `flutter pub get` `flutter run -d chrome --web-port 5000`
     - Mobile: 
       - Trust the device and make sure to trust the app. For iOS, [Settings -> General -> VPN & Device Management -> Trust]
-      - `flutter pub get` `flutter run`
+      - On Android, enable Trust USB Debugging
+     - Run `flutter pub get` and `flutter run` on computer
 
 ## Installation Instructions (TFLite) 
 
