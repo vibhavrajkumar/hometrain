@@ -18,16 +18,16 @@ The app includes two main features: workout detection and workout tracking.
 
 ## How The Files Are Organized:
 * `HomeTrain_iOS` is the native iOS TFLite code. It is built off of the [PoseNet Example Code](https://github.com/tensorflow/examples/tree/master/lite/examples/pose_estimation/ios)
-        -  The model + set up is contained in `ML`
-        -  The UI and modifications are contained in `UI`
-        -  The main logical components are contained in `Views` & `ViewController`
-        -  Pods contains necessary dependencies 
+        *  The model + set up is contained in `ML`
+        *  The UI and modifications are contained in `UI`
+        *  The main logical components are contained in `Views` & `ViewController`
+        *  Pods contains necessary dependencies 
 * `home_train` contains the dart code and UI
-        - `web`, `iOS`, and `android` contain platform-specific dependencies and code
-        - `pubspec.yaml` contains the necessary dependencies
-        - `lib` has the running code, with main, constants and other important dart code
-            - `screens` contains each screen view
-            - `components` contains widgets/functions/components that are important
+        * `web`, `iOS`, and `android` contain platform-specific dependencies and code
+        * `pubspec.yaml` contains the necessary dependencies
+        * `lib` has the running code, with main, constants and other important dart code
+            * `screens` contains each screen view
+            * `components` contains widgets/functions/components that are important
 * Things that aren't mentioned are boilerplate/dependency documents or assets
 
 ## Installation Instructions (Flutter) 
@@ -35,7 +35,7 @@ The app includes two main features: workout detection and workout tracking.
 1. Download and install Flutter, can be installed in VSCode (https://docs.flutter.dev/get-started/install) 
 2. Clone the github `git clone "https://github.com/CS222SP22/course-project-mem"`
 3. Go into the home train directory `cd home_train`
-4. Build + Run on web or physical mobile device (we reccomend web)
+4. Build + Run on web or physical mobile device (we reccomend web — mobile apps have a lot of overhead and build issues outside of app stores)
     - Web: `flutter pub get` `flutter run -d chrome --web-port 5000`
     - Mobile: 
       - Trust the device and make sure to trust the app. For iOS, [Settings -> General -> VPN & Device Management -> Trust]
